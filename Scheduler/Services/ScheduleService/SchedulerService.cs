@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Scheduler.ScheduleService
 {
-    public class SchedulerService<T> : IScheduleService<T>
+    public class SchedulerService<T> :  IScheduleService<T>
     {
 
         private readonly List<T> _listOfObjectsMoq = new List<T>();
