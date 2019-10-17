@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ScheduleService\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
