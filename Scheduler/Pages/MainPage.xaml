@@ -1,18 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Scheduler.MainPage">
-    <StackLayout Spacing="10" x:Name="layout" Padding="8,20">
-        <Label Text="Welcome!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-        <ListView ItemsSource="{Binding ListOfItems}">
+    <StackLayout Spacing="10" x:Name="layout" Padding="8,30">
+        <Label Text="Welcome!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="Aqua"/>
+        <ListView
+            SeparatorVisibility="None"
+            SeparatorColor="Transparent"
+            ItemsSource="{Binding ListOfItems}"
+            SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Title}" />
+                            <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="Orange">
+                                <Label Text="{Binding Title}" BackgroundColor="Red" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation"  />
+                                <Image Source="icon"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Delete" Command="{Binding Path=BindingContext.DeleteCommand, Source={}}" CommandParameter="{Binding .}"/>
+        <Button Text="Add record" Command="{Binding AddRecordCommand}" TextColor="Green"/>
+        <Button Text="Delete record" Command="{Binding DeleteCommand}" TextColor="Red"/>
     </StackLayout>
 </ContentPage>

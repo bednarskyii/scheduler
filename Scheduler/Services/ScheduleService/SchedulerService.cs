@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scheduler.Models;
 
 namespace Scheduler.ScheduleService
 {
     public class SchedulerService<T> :  IScheduleService<T>
     {
-
-        private readonly List<T> _listOfObjectsMoq = new List<T>();
-
         public void AddObjectToList(T record)
         {
-            _listOfObjectsMoq.Add(record);
+            CancerDatabase.listOfObjectsMoq.Add(record as ScheduleRecord);
         }
 
         public void DeleteObject(T record)
         {
-            _listOfObjectsMoq.Remove(record);
+            CancerDatabase.listOfObjectsMoq.Remove(record as ScheduleRecord);
         }
 
-        public List<T> GetAll()
+        public List<ScheduleRecord> GetAll()
         {
-            return _listOfObjectsMoq;
+            return CancerDatabase.listOfObjectsMoq;
         }
     }
 }

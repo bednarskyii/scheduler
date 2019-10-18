@@ -18,7 +18,7 @@ namespace Scheduler
         {
             InitializeComponent();
 
-            BindingContext = new MainPageViewModel();
+            BindingContext = new MainPageViewModel(Navigation);
         }
     }
 }

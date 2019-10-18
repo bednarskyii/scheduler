@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Scheduler.Models;
 
 namespace Scheduler.ScheduleService
 {
@@ -7,6 +8,6 @@ namespace Scheduler.ScheduleService
     {
         void AddObjectToList(T record);
         void DeleteObject(T record);
-        List<T> GetAll();
+        List<ScheduleRecord> GetAll();
     }
 }
