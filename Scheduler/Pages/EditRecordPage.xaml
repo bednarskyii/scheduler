@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scheduler.Pages.EditRecordPage">
+    <StackLayout Margin="40">
+        <Label Text="Title:" FontSize="Medium"/>
+        <Editor Text="{Binding Title}"
+                HeightRequest="100"/>
+        <Label Text="Text:" FontSize="Medium"/>
+        <Editor Text="{Binding Text}"
+                HeightRequest="100"/>
+        <Label Text="Date:" FontSize="Medium"/>
+        <DatePicker MinimumDate="{Binding MinDate}"
+                    Date="{Binding Date}"
+                    HeightRequest="100"/>
+        <Label Text="Status:" FontSize="Medium"/>
+        <Picker Title="Select a Status:"
+                TitleColor="Black"
+                ItemsSource="{Binding ListOfStatuses}"
+                SelectedItem="{Binding SelectedStatus}"
+                HeightRequest="100"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"
+                    TextColor="Green"/>
+            <Button Grid.Column="1"
+                    Text="Cancel"
+                    Command="{Binding CancelCommand}"
+                    TextColor="Red"/>
+        </Grid>
+    </StackLayout>
+</ContentPage>

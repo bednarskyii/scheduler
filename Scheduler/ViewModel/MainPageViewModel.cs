@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Acr.UserDialogs;
 using Scheduler.Models;
 using Scheduler.Pages;
 using Scheduler.ScheduleService;
@@ -35,12 +36,14 @@ namespace Scheduler.ViewModel
 
         public ScheduleRecord SelectedItem { get; set; }
         public Command DeleteCommand { get; set; }
-        public Command<object> AddRecordCommand { get; set; }
+        public Command AddRecordCommand { get; set; }
+        public Command EditRecordCommand { get; set; }
 
         public MainPageViewModel(INavigation navigation)
         {
-            DeleteCommand = new Command(() => OnDeleteTapped());
-            AddRecordCommand = new Command<object>(OnAddRecordTapped);
+            DeleteCommand = new Command(OnDeleteTapped);
+            AddRecordCommand = new Command(OnAddRecordTapped);
+            EditRecordCommand = new Command(OnEditRecordTapped);
             _schedulerService = new SchedulerService<ScheduleRecord>();
 
             Navigation = navigation;
@@ -50,33 +53,31 @@ namespace Scheduler.ViewModel
 
         public void InitializeList()
         {
-            _schedulerService.AddObjectToList(new ScheduleRecord { Title = "FirstMoqTitle", ExpirationTime = DateTime.Now, TextBody = "asdfsfasfdasdfas" });
-            _schedulerService.AddObjectToList(new ScheduleRecord { Title = "SecondMoqTitle", ExpirationTime = DateTime.Now, TextBody = "asdfsfasfdasfadsfadsfadsfsadasdfasdsd" });
-
             ListOfItems = new ObservableCollection<ScheduleRecord>(_schedulerService.GetAll());
+
         }
 
         private void OnDeleteTapped()
         {
-           // if(ShowAlert("Do you want to delete the record?", "Loh", "Yes", "No").Result)
+            UserDialogs.Instance.Alert("You have deleted an object");
+            //if (ShowAlert("Do you want to delete the record?", "Loh", "Yes", "No").Result)
             _schedulerService.DeleteObject(SelectedItem);
             ListOfItems.Remove(SelectedItem);
         }
 
-        private void OnAddRecordTapped(object obj)
-        {
-            ReturnAddRecordPage();
-        }
-
-        private void ReturnAddRecordPage()
+        private void OnAddRecordTapped()
         {
             Navigation.PushModalAsync(new AddRecordPage(this));
+        }
+
+        private void OnEditRecordTapped()
+        {
+            Navigation.PushModalAsync(new EditRecordPage(this, SelectedItem));
         }
 
         private async Task<bool> ShowAlert(string question, string message, string var1, string var2)
         {
              return await Application.Current.MainPage.DisplayAlert(question, message, var1, var2);
         }
-
     }
 }

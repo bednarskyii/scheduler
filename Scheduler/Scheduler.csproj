@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -15,6 +16,7 @@
     <Folder Include="Services\" />
     <Folder Include="Services\ScheduleService\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\EmptyClass.cs" />
