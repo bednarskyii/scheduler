@@ -19,7 +19,6 @@
                 ItemsSource="{Binding ListOfStatuses}"
                 SelectedItem="{Binding SelectedStatus}"
                 HeightRequest="100"/>
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
