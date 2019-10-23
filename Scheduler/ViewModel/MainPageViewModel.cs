@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -41,7 +39,7 @@ namespace Scheduler.ViewModel
 
         public MainPageViewModel(INavigation navigation)
         {
-            DeleteCommand = new Command(OnDeleteTapped);
+            DeleteCommand = new Command(() => OnDeleteTapped());
             AddRecordCommand = new Command(OnAddRecordTapped);
             EditRecordCommand = new Command(OnEditRecordTapped);
             _schedulerService = new SchedulerService<ScheduleRecord>();
@@ -57,12 +55,22 @@ namespace Scheduler.ViewModel
 
         }
 
-        private void OnDeleteTapped()
+        private async Task OnDeleteTapped()
         {
-            UserDialogs.Instance.Alert("You have deleted an object");
-            //if (ShowAlert("Do you want to delete the record?", "Loh", "Yes", "No").Result)
-            _schedulerService.DeleteObject(SelectedItem);
-            ListOfItems.Remove(SelectedItem);
+            ConfirmConfig config = new ConfirmConfig()
+            {
+                Message = "Delete the record?",
+                OkText = "Delete",
+                CancelText = "Cancel"
+            };
+
+            var res = await GetConfirmResult(config);
+
+            if (res)
+            {
+                _schedulerService.DeleteObject(SelectedItem);
+                ListOfItems.Remove(SelectedItem);
+            }
         }
 
         private void OnAddRecordTapped()
@@ -75,9 +83,9 @@ namespace Scheduler.ViewModel
             Navigation.PushModalAsync(new EditRecordPage(this, SelectedItem));
         }
 
-        private async Task<bool> ShowAlert(string question, string message, string var1, string var2)
+        private async Task<bool> GetConfirmResult(ConfirmConfig config)
         {
-             return await Application.Current.MainPage.DisplayAlert(question, message, var1, var2);
+            return await UserDialogs.Instance.ConfirmAsync(config);
         }
     }
 }

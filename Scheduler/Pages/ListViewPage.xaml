@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scheduler.Pages.ListViewPage">
+
+    <StackLayout Spacing="10" x:Name="layout" Padding="8,30">
+        <ListView
+            SeparatorVisibility="None"
+            SeparatorColor="Transparent"
+            ItemsSource="{Binding ListOfItems}"
+            SelectedItem="{Binding SelectedItem}"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Padding="10">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
+                                    <Frame BorderColor="Red" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
+                                        <Label Text="{Binding Status}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small"  TextColor="Red" WidthRequest="100"
+                                               VerticalOptions="CenterAndExpand"/>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding TextBody}" HorizontalOptions="StartAndExpand"  FontSize="Micro" TextColor="Gray"/>
+                                    <Label Text="{Binding ExpirationTime, StringFormat='{0:MMMM dd}'}" HorizontalOptions="End" HorizontalTextAlignment="End"
+                                           FontSize="Small" TextColor="Chocolate" WidthRequest="100" VerticalOptions="StartAndExpand"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+        </ListView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+             </Grid.ColumnDefinitions>
+             <Button Text="Add record"
+                     Command="{Binding AddRecordCommand}"
+                     TextColor="Green" />
+             <Button Grid.Column="1"
+                     Text="Edit record"
+                     Command="{Binding EditRecordCommand}"
+                     TextColor="Black" />
+             <Button Grid.Column="2"
+                     Text="Delete record"
+                     Command="{Binding DeleteCommand}"
+                     TextColor="Red" />
+        </Grid>
+    </StackLayout>
+</ContentPage>
