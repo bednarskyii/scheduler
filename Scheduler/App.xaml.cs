@@ -11,7 +11,7 @@ namespace Scheduler
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new ListViewPage();
         }
 
         protected override void OnStart()

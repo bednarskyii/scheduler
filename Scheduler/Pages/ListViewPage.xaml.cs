@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Scheduler.ViewModel;
 using Xamarin.Forms;
 
 namespace Scheduler.Pages
@@ -10,6 +10,8 @@ namespace Scheduler.Pages
         public ListViewPage()
         {
             InitializeComponent();
+
+            BindingContext = new ListViewPageViewModel(Navigation);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Scheduler.ViewModel
     public class AddRecordPageViewModel
     {
         private IScheduleService<ScheduleRecord> _scheduleService;
-        private MainPageViewModel _pg;
+        private ListViewPageViewModel _pg;
 
         public INavigation Navigation { get; set; }
         public Command<object> SaveCommand { get; set; }
@@ -15,7 +15,7 @@ namespace Scheduler.ViewModel
         public string Text { get; set; }
         public string Title { get; set; }
 
-        public AddRecordPageViewModel(INavigation navigation, MainPageViewModel pg)
+        public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
             Navigation = navigation;
             _scheduleService = new SchedulerService<ScheduleRecord>();

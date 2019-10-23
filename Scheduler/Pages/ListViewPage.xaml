@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Scheduler.Pages.ListViewPage">
+             x:Class="Scheduler.Pages.ListViewPage" >
 
     <StackLayout Spacing="10" x:Name="layout" Padding="8,30">
         <ListView
+            BackgroundColor="Aqua"
             SeparatorVisibility="None"
             SeparatorColor="Transparent"
             ItemsSource="{Binding ListOfItems}"
@@ -31,7 +32,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
         </ListView>
-        <Grid>
+        <Grid BackgroundColor="Beige">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

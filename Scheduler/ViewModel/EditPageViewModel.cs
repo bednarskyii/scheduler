@@ -25,11 +25,11 @@ namespace Scheduler.ViewModel
 
 
         private ScheduleRecord _currentObject;
-        private MainPageViewModel _pg;
+        private ListViewPageViewModel _pg;
         private IScheduleService<ScheduleRecord> _scheduleService;
 
 
-        public EditPageViewModel(INavigation navigation, MainPageViewModel pg, ScheduleRecord currentObject)
+        public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, ScheduleRecord currentObject)
         {
             _scheduleService = new SchedulerService<ScheduleRecord>();
             _currentObject = currentObject;

@@ -7,7 +7,7 @@ namespace Scheduler.Pages
 {
     public partial class AddRecordPage : ContentPage
     {
-        public AddRecordPage(MainPageViewModel pg)
+        public AddRecordPage(ListViewPageViewModel pg)
         {
             BindingContext = new AddRecordPageViewModel(Navigation, pg);
             InitializeComponent();
