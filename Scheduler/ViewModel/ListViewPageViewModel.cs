@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {
-    public class ListViewPageViewModel
+    public class ListViewPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,19 +57,26 @@ namespace Scheduler.ViewModel
 
         private async Task OnDeleteTapped()
         {
-            ConfirmConfig config = new ConfirmConfig()
+            if (SelectedItem != null)
             {
-                Message = "Delete the record?",
-                OkText = "Delete",
-                CancelText = "Cancel"
-            };
+                ConfirmConfig config = new ConfirmConfig()
+                {
+                    Message = "Delete the record?",
+                    OkText = "Delete",
+                    CancelText = "Cancel"
+                };
 
-            var res = await GetConfirmResult(config);
+                var res = await GetConfirmResult(config);
 
-            if (res)
+                if (res)
+                {
+                    _schedulerService.DeleteObject(SelectedItem);
+                    ListOfItems.Remove(SelectedItem);
+                }
+            }
+            else
             {
-                _schedulerService.DeleteObject(SelectedItem);
-                ListOfItems.Remove(SelectedItem);
+                UserDialogs.Instance.Alert("Select an item, please");
             }
         }
 
@@ -80,7 +87,14 @@ namespace Scheduler.ViewModel
 
         private void OnEditRecordTapped()
         {
-            Navigation.PushModalAsync(new EditRecordPage(this, SelectedItem));
+            if (SelectedItem != null)
+            {
+                Navigation.PushModalAsync(new EditRecordPage(this, SelectedItem));
+            }
+            else
+            {
+                UserDialogs.Instance.Alert("Select an item, please");
+            }
         }
 
         private async Task<bool> GetConfirmResult(ConfirmConfig config)

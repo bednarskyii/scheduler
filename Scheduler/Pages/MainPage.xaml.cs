@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Scheduler.Models;
 using Scheduler.Pages;
 using Scheduler.ViewModel;
 using Xamarin.Forms;
@@ -19,10 +20,18 @@ namespace Scheduler
         {
             InitializeComponent();
 
-            Master = new MainPage();
-            Detail = new NavigationPage(new ListViewPage());
+            MasterPage.listView.ItemSelected += OnItemSelected;
+        }
 
-            BindingContext = new MainPageViewModel(Navigation);
+        void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as MasterPageItem;
+            if (item != null)
+            {
+                Detail = new NavigationPage((Page)Activator.CreateInstance(item.TargetType));
+                MasterPage.listView.SelectedItem = null;
+                IsPresented = false;
+            }
         }
     }
 }

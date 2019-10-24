@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Scheduler.MainPage"
-             Title="Personal Organiser">
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:local="clr-namespace:Scheduler.Pages;assembly=Scheduler"
+                  x:Class="Scheduler.MainPage"
+                  Title="MainPage">
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu" BackgroundColor="LightGray">
-            <ContentPage.Content>
-                <StackLayout Padding="10,40,10,10">
-                    <Button Text="Schedule" Command="{Binding MoveToSchedule}"></Button>
-                    <Button Text="About" Command="{Binding MoveToAbout}"></Button>
-                </StackLayout>
-            </ContentPage.Content>
-        </ContentPage>
+        <local:MasterPage x:Name="MasterPage" />
     </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <local:ListViewPage />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
 </MasterDetailPage>
+
+    

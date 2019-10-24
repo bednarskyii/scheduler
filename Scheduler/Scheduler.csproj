@@ -23,6 +23,8 @@
     <Compile Remove="SchedulerPage.xaml.cs" />
     <Compile Remove="Pages\SchedulerPage.xaml.cs" />
     <Compile Remove="Pages\SchedulerPage.xaml.cs" />
+    <Compile Remove="Models\Master.cs" />
+    <Compile Remove="Models\MasterPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\MainPage.xaml.cs">
