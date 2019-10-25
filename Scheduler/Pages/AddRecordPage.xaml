@@ -10,6 +10,9 @@
         <Editor Placeholder="Enter additional text"
                 Text="{Binding Text}"
                 HeightRequest="100" />
+        <Label Text="Date:" FontSize="Medium"/>
+        <DatePicker MinimumDate="{Binding MinDate}"
+                    Date="{Binding Date}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

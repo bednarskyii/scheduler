@@ -2,9 +2,86 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scheduler.Pages.ListViewPage"
-             Title="Schedule">
+             Title="Schedule"
+             xmlns:views="clr-namespace:Scheduler.Views">
 
-    <StackLayout Spacing="10" x:Name="layout" Padding="8,30">
+    <StackLayout Spacing="10" x:Name="layout" Padding="8,10">
+
+        <views:Calendar/>
+
+        <!--<Label Text="September"></Label>
+
+        <Grid WidthRequest="100"
+              HeightRequest="500"
+              Margin="20"
+              x:Name="controlGrid">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0" BackgroundColor="AliceBlue" Text="1"></Button>
+            <Button Grid.Column="1" Grid.Row="0" BackgroundColor="AliceBlue" Text="2"></Button>
+            <Button Grid.Column="2" Grid.Row="0" BackgroundColor="AliceBlue" Text="3"></Button>
+            <Button Grid.Column="3" Grid.Row="0" BackgroundColor="AliceBlue" Text="4"></Button>
+            <Button Grid.Column="4" Grid.Row="0" BackgroundColor="AliceBlue" Text="5"></Button>
+            <Button Grid.Column="5" Grid.Row="0" BackgroundColor="AliceBlue" Text="6"></Button>
+            <Button Grid.Column="6" Grid.Row="0" BackgroundColor="AliceBlue" Text="7"></Button>
+            <Button Grid.Column="0" Grid.Row="1" BackgroundColor="AliceBlue" Text="8"></Button>
+            <Button Grid.Column="1" Grid.Row="1" BackgroundColor="AliceBlue" Text="9"></Button>
+            <Button Grid.Column="2" Grid.Row="1" BackgroundColor="AliceBlue" Text="10"></Button>
+            <Button Grid.Column="3" Grid.Row="1" BackgroundColor="AliceBlue" Text="11"></Button>
+            <Button Grid.Column="4" Grid.Row="1" BackgroundColor="AliceBlue" Text="12"></Button>
+            <Button Grid.Column="5" Grid.Row="1" BackgroundColor="AliceBlue" Text="13"></Button>
+            <Button Grid.Column="6" Grid.Row="1" BackgroundColor="AliceBlue" Text="14"></Button>
+            <Button Grid.Column="0" Grid.Row="2" BackgroundColor="AliceBlue" Text="1"></Button>
+            <Button Grid.Column="1" Grid.Row="2" BackgroundColor="AliceBlue" Text="2"></Button>
+            <Button Grid.Column="2" Grid.Row="2" BackgroundColor="AliceBlue" Text="3"></Button>
+            <Button Grid.Column="3" Grid.Row="2" BackgroundColor="AliceBlue" Text="4"></Button>
+            <Button Grid.Column="4" Grid.Row="2" BackgroundColor="AliceBlue" Text="5"></Button>
+            <Button Grid.Column="5" Grid.Row="2" BackgroundColor="AliceBlue" Text="6"></Button>
+            <Button Grid.Column="6" Grid.Row="2" BackgroundColor="AliceBlue" Text="7"></Button>
+            <Button Grid.Column="0" Grid.Row="3" BackgroundColor="AliceBlue" Text="8"></Button>
+            <Button Grid.Column="1" Grid.Row="3" BackgroundColor="AliceBlue" Text="9"></Button>
+            <Button Grid.Column="2" Grid.Row="3" BackgroundColor="AliceBlue" Text="10"></Button>
+            <Button Grid.Column="3" Grid.Row="3" BackgroundColor="AliceBlue" Text="11"></Button>
+            <Button Grid.Column="4" Grid.Row="3" BackgroundColor="AliceBlue" Text="12"></Button>
+            <Button Grid.Column="5" Grid.Row="3" BackgroundColor="AliceBlue" Text="13"></Button>
+            <Button Grid.Column="6" Grid.Row="3" BackgroundColor="AliceBlue" Text="14"></Button>
+            <Button Grid.Column="0" Grid.Row="4" BackgroundColor="AliceBlue" Text="8"></Button>
+            <Button Grid.Column="1" Grid.Row="4" BackgroundColor="AliceBlue" Text="9"></Button>
+            <Button Grid.Column="2" Grid.Row="4" BackgroundColor="AliceBlue" Text="10"></Button>
+            <Button Grid.Column="3" Grid.Row="4" BackgroundColor="AliceBlue" Text="11"></Button>
+            <Button Grid.Column="4" Grid.Row="4" BackgroundColor="AliceBlue" Text="12"></Button>
+            <Button Grid.Column="5" Grid.Row="4" BackgroundColor="AliceBlue" Text="13"></Button>
+            <Button Grid.Column="6" Grid.Row="4" BackgroundColor="AliceBlue" Text="14"></Button>
+            <Button Grid.Column="0" Grid.Row="5" BackgroundColor="AliceBlue" Text="8"></Button>
+            <Button Grid.Column="1" Grid.Row="5" BackgroundColor="AliceBlue" Text="9"></Button>
+            <Button Grid.Column="2" Grid.Row="5" BackgroundColor="AliceBlue" Text="10"></Button>
+            <Button Grid.Column="3" Grid.Row="5" BackgroundColor="AliceBlue" Text="11"></Button>
+            <Button Grid.Column="4" Grid.Row="5" BackgroundColor="AliceBlue" Text="12"></Button>
+            <Button Grid.Column="5" Grid.Row="5" BackgroundColor="AliceBlue" Text="13"></Button>
+            <Button Grid.Column="6" Grid.Row="5" BackgroundColor="AliceBlue" Text="14"></Button>
+
+        </Grid>-->
+
+
+
         <ListView
             SeparatorVisibility="None"
             SeparatorColor="Transparent"

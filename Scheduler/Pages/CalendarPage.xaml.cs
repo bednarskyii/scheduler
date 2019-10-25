@@ -10,6 +10,7 @@ namespace Scheduler.Pages
         public CalendarPage()
         {
             InitializeComponent();
+            
         }
     }
 }

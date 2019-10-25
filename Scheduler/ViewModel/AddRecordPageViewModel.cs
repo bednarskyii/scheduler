@@ -1,4 +1,5 @@
-﻿using Scheduler.Models;
+﻿using System;
+using Scheduler.Models;
 using Scheduler.ScheduleService;
 using Xamarin.Forms;
 
@@ -14,6 +15,9 @@ namespace Scheduler.ViewModel
         public Command<object> CancelCommand { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime MinDate { get; set; } = DateTime.Now;
+
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
@@ -33,7 +37,7 @@ namespace Scheduler.ViewModel
         private void OnSaveTapped(object obj)
         {
             if(!string.IsNullOrWhiteSpace(Title))
-            _scheduleService.AddObjectToList(new ScheduleRecord { Title = this.Title, TextBody = this.Text });
+            _scheduleService.AddObjectToList(new ScheduleRecord { Title = this.Title, TextBody = this.Text, ExpirationTime = this.Date });
             ReturnToPreviousPage();
         }
 
