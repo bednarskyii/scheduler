@@ -14,7 +14,7 @@ namespace Scheduler.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IScheduleService<ScheduleRecord> _schedulerService;
+        private IScheduleService _schedulerService;
         private ObservableCollection<ScheduleRecord> _listOfItems;
 
         public INavigation Navigation { get; set; }
@@ -42,7 +42,7 @@ namespace Scheduler.ViewModel
             DeleteCommand = new Command(() => OnDeleteTapped());
             AddRecordCommand = new Command(OnAddRecordTapped);
             EditRecordCommand = new Command(OnEditRecordTapped);
-            _schedulerService = new SchedulerService<ScheduleRecord>();
+            _schedulerService = new SchedulerService();
 
             Navigation = navigation;
 

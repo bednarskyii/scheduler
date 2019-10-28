@@ -4,16 +4,16 @@ using Scheduler.Models;
 
 namespace Scheduler.ScheduleService
 {
-    public class SchedulerService<T> :  IScheduleService<T>
+    public class SchedulerService :  IScheduleService
     {
-        public void AddObjectToList(T record)
+        public void AddObjectToList(ScheduleRecord record)
         {
-            CancerDatabase.listOfObjectsMoq.Add(record as ScheduleRecord);
+            CancerDatabase.listOfObjectsMoq.Add(record);
         }
 
-        public void DeleteObject(T record)
+        public void DeleteObject(ScheduleRecord record)
         {
-            CancerDatabase.listOfObjectsMoq.Remove(record as ScheduleRecord);
+            CancerDatabase.listOfObjectsMoq.Remove(record);
         }
 
         public List<ScheduleRecord> GetAll()

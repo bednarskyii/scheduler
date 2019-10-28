@@ -6,7 +6,7 @@ namespace Scheduler.ViewModel
 {
     public class AddRecordPageViewModel
     {
-        private IScheduleService<ScheduleRecord> _scheduleService;
+        private IScheduleService _scheduleService;
         private ListViewPageViewModel _pg;
 
         public INavigation Navigation { get; set; }
@@ -18,7 +18,7 @@ namespace Scheduler.ViewModel
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
             Navigation = navigation;
-            _scheduleService = new SchedulerService<ScheduleRecord>();
+            _scheduleService = new SchedulerService();
             InitializeViewModel();
 
             _pg = pg;
@@ -32,8 +32,11 @@ namespace Scheduler.ViewModel
 
         private void OnSaveTapped(object obj)
         {
-            if(!string.IsNullOrWhiteSpace(Title))
-            _scheduleService.AddObjectToList(new ScheduleRecord { Title = this.Title, TextBody = this.Text });
+            if (!string.IsNullOrWhiteSpace(Title))
+            {
+                _scheduleService.AddObjectToList(new ScheduleRecord { Title = Title, TextBody = Text });
+            }
+
             ReturnToPreviousPage();
         }
 

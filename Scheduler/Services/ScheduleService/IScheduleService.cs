@@ -4,10 +4,10 @@ using Scheduler.Models;
 
 namespace Scheduler.ScheduleService
 {
-    public interface  IScheduleService<T>
+    public interface  IScheduleService
     {
-        void AddObjectToList(T record);
-        void DeleteObject(T record);
+        void AddObjectToList(ScheduleRecord record);
+        void DeleteObject(ScheduleRecord record);
         List<ScheduleRecord> GetAll();
     }
 }
