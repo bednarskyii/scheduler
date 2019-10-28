@@ -2,8 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scheduler.Pages.ListViewPage"
-             Title="Schedule">
+             Title="Schedule"
+             xmlns:statusConverter="clr-namespace:Scheduler.Converter;assembly=Scheduler">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <statusConverter:StatusToColorConverter x:Key="statusToColorConverter" />
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
     <StackLayout Spacing="10" x:Name="layout" Padding="8,30">
         <ListView
             SeparatorVisibility="None"
@@ -17,9 +24,9 @@
                             <StackLayout Orientation="Vertical" Padding="10">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
-                                    <Frame BorderColor="Red" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
+                                    <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
                                         <Label Text="{Binding Status}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
-                                               VerticalOptions="CenterAndExpand"/>
+                                               VerticalOptions="CenterAndExpand" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}"/>
                                     </Frame>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">

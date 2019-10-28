@@ -66,7 +66,7 @@ namespace Scheduler.ViewModel
                     CancelText = "Cancel"
                 };
 
-                var res = await GetConfirmResult(config);
+                var res = await UserDialogs.Instance.ConfirmAsync(config);
 
                 if (res)
                 {
@@ -95,11 +95,6 @@ namespace Scheduler.ViewModel
             {
                 UserDialogs.Instance.Alert("Select an item, please");
             }
-        }
-
-        private async Task<bool> GetConfirmResult(ConfirmConfig config)
-        {
-            return await UserDialogs.Instance.ConfirmAsync(config);
         }
     }
 }

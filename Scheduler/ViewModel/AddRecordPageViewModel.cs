@@ -1,4 +1,5 @@
-﻿using Scheduler.Models;
+﻿using Scheduler.Converter;
+using Scheduler.Models;
 using Scheduler.ScheduleService;
 using Xamarin.Forms;
 
@@ -17,17 +18,12 @@ namespace Scheduler.ViewModel
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
-            Navigation = navigation;
-            _scheduleService = new SchedulerService();
-            InitializeViewModel();
-
-            _pg = pg;
-        }
-
-        private void InitializeViewModel()
-        {
             SaveCommand = new Command<object>(OnSaveTapped);
             CancelCommand = new Command<object>(OnCancelTapped);
+            _scheduleService = new SchedulerService();
+            Navigation = navigation;
+
+            _pg = pg;
         }
 
         private void OnSaveTapped(object obj)

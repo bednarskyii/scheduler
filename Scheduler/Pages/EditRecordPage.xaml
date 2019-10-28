@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Scheduler.Pages.EditRecordPage">
+             x:Class="Scheduler.Pages.EditRecordPage"
+             xmlns:statusConverter="clr-namespace:Scheduler.Converter;assembly=Scheduler">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <statusConverter:EnumToStringWithSpacesConverter x:Key="enumToStringWithSpacesConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Margin="40">
         <Label Text="Title:" FontSize="Medium"/>
         <Editor Text="{Binding Title}"
@@ -16,7 +22,7 @@
         <Label Text="Status:" FontSize="Medium"/>
         <Picker Title="Select a Status:"
                 TitleColor="Black"
-                ItemsSource="{Binding ListOfStatuses}"
+                ItemsSource="{Binding ListOfStatuses, Converter={StaticResource enumToStringWithSpacesConverter}}"
                 SelectedItem="{Binding SelectedStatus}"
                 HeightRequest="100"/>
         <Grid>
