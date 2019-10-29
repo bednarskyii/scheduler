@@ -1,6 +1,5 @@
-﻿using Scheduler.Converter;
-using Scheduler.Models;
-using Scheduler.ScheduleService;
+﻿using Scheduler.Models;
+using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
@@ -30,7 +29,7 @@ namespace Scheduler.ViewModel
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
-                _scheduleService.AddObjectToList(new ScheduleRecord { Title = Title, TextBody = Text });
+                _scheduleService.AddObjectToList(new ScheduleRecord { Title = Title, TextBody = Text, Status = Enums.RecordStatuses.Scheduled });
             }
 
             ReturnToPreviousPage();

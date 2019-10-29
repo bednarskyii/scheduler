@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scheduler.Pages.ListViewPage"
              Title="Schedule"
-             xmlns:statusConverter="clr-namespace:Scheduler.Converter;assembly=Scheduler">
+             xmlns:converters="clr-namespace:Scheduler.Converter;assembly=Scheduler">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <statusConverter:StatusToColorConverter x:Key="statusToColorConverter" />
+            <converters:StatusToColorConverter x:Key="statusToColorConverter" />
+            <converters:SingleEnumToStrWithSpacesConverter x:Key="singleStatusToString" />
         </ResourceDictionary>
 
     </ContentPage.Resources>
@@ -25,7 +26,7 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
                                     <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
-                                        <Label Text="{Binding Status}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
+                                        <Label Text="{Binding Status, Converter={StaticResource singleStatusToString}}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
                                                VerticalOptions="CenterAndExpand" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}"/>
                                     </Frame>
                                 </StackLayout>

@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scheduler.Pages.EditRecordPage"
-             xmlns:statusConverter="clr-namespace:Scheduler.Converter;assembly=Scheduler">
+             xmlns:converters="clr-namespace:Scheduler.Converter;assembly=Scheduler">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <statusConverter:EnumToStringWithSpacesConverter x:Key="enumToStringWithSpacesConverter" />
+            <converters:EnumToStringWithSpacesConverter x:Key="enumToStringWithSpacesConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="40">

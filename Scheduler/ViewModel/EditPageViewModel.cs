@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using Scheduler.Converter;
 using Scheduler.Enums;
 using Scheduler.Models;
-using Scheduler.ScheduleService;
+using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
@@ -16,7 +14,7 @@ namespace Scheduler.ViewModel
         public INavigation Navigation { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; }
         public DateTime MinDate { get; set; } = DateTime.Now;
         public string SelectedStatus { get; set; }
         public IList<RecordStatuses> ListOfStatuses { get; set; }

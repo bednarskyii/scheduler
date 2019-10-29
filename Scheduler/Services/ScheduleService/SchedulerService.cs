@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Scheduler.Models;
 
-namespace Scheduler.ScheduleService
+namespace Scheduler.Services
 {
     public class SchedulerService :  IScheduleService
     {
