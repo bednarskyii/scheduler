@@ -24,6 +24,7 @@
                 TitleColor="Black"
                 ItemsSource="{Binding ListOfStatuses, Converter={StaticResource enumToStringWithSpacesConverter}}"
                 SelectedItem="{Binding SelectedStatus}"
+                SelectedIndex="{Binding SelectedStatusIndex}"
                 HeightRequest="100"/>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -16,8 +16,9 @@ namespace Scheduler.ViewModel
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public DateTime MinDate { get; set; } = DateTime.Now;
-        public string SelectedStatus { get; set; }
         public IList<RecordStatuses> ListOfStatuses { get; set; }
+        public string SelectedStatus { get; set; }
+        public int SelectedStatusIndex { get; set; }
 
 
         public Command SaveCommand { get; set; }
