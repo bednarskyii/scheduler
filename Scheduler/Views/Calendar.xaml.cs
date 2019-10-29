@@ -7,6 +7,20 @@ namespace Scheduler.Views
     public partial class Calendar : ContentView
     {
         private DateTime _selectedDate { get; set; } = DateTime.Now;
+        private DateTime _selectedDay { get; set; } = DateTime.Now;
+
+        public static readonly BindableProperty SelectedDayProperty = BindableProperty.Create(
+                                                         propertyName: "SelectedDay",
+                                                         returnType: typeof(DateTime),
+                                                         declaringType: typeof(Calendar),
+                                                         defaultBindingMode: BindingMode.OneWayToSource,
+                                                         propertyChanged: OnSelectedDayChanged);
+
+        public DateTime SelectedDay
+        {
+            get { return (DateTime)GetValue(SelectedDayProperty); }
+            set { SetValue(SelectedDayProperty, value); }
+        }
 
         public Calendar()
         {
@@ -41,10 +55,10 @@ namespace Scheduler.Views
 
                     Button button = new Button()
                     {
-                        BackgroundColor = currentDay == DateTime.Today ? Color.LightSkyBlue : Color.White,
+                            BackgroundColor = currentDay == DateTime.Today ? Color.LightSkyBlue : Color.White,
                             Text = currentDay.Day.ToString(),
                             TextColor = currentDay.Month == month ? Color.Black : Color.Gray,
-                            CommandParameter = currentDay.Date,
+                            CommandParameter = currentDay.Date
                         };
 
                     if (j == 5 || j == 6)
@@ -73,7 +87,14 @@ namespace Scheduler.Views
 
         private void OnDayClicked(object sender, EventArgs e)
         {
+            var button = (Button)sender;
+            DateTime date = (DateTime)button.CommandParameter;
+            SelectedDay = date;
+        }
 
+        private static void OnSelectedDayChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            //q
         }
 
     }

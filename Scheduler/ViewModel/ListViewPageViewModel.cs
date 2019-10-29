@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Acr.UserDialogs;
 using Scheduler.Models;
 using Scheduler.Pages;
-using Scheduler.ScheduleService;
+using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
@@ -14,12 +14,13 @@ namespace Scheduler.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IScheduleService<ScheduleRecord> _schedulerService;
-        private ObservableCollection<ScheduleRecord> _listOfItems;
+        private IScheduleService _schedulerService;
+        private ObservableCollection<SingleDateRecord> _listOfItems;
+        private DateTime _selectedDay = DateTime.Now.Date;
 
         public INavigation Navigation { get; set; }
 
-        public ObservableCollection<ScheduleRecord> ListOfItems
+        public ObservableCollection<SingleDateRecord> ListOfItems
         {
             get
             {
@@ -32,7 +33,19 @@ namespace Scheduler.ViewModel
             }
         }
 
-        public ScheduleRecord SelectedItem { get; set; }
+        public DateTime SelectedDay
+        {
+            set
+            {
+                _selectedDay = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDay)));
+            }
+            get
+            {
+                return _selectedDay;
+            }
+        }
+        public SingleDateRecord SelectedItem { get; set; }
         public Command DeleteCommand { get; set; }
         public Command AddRecordCommand { get; set; }
         public Command EditRecordCommand { get; set; }
@@ -40,18 +53,18 @@ namespace Scheduler.ViewModel
         public ListViewPageViewModel(INavigation navigation)
         {
             DeleteCommand = new Command(() => OnDeleteTapped());
-            AddRecordCommand = new Command(OnAddRecordTapped);
+            AddRecordCommand = new Command(() => OnAddRecordTapped());
             EditRecordCommand = new Command(OnEditRecordTapped);
-            _schedulerService = new SchedulerService<ScheduleRecord>();
+            _schedulerService = new SchedulerService();
 
             Navigation = navigation;
 
             InitializeList();
         }
 
-        public void InitializeList()
+        public async Task InitializeList()
         {
-            ListOfItems = new ObservableCollection<ScheduleRecord>(_schedulerService.GetAll());
+            ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetAll(_selectedDay));
 
         }
 
@@ -66,11 +79,11 @@ namespace Scheduler.ViewModel
                     CancelText = "Cancel"
                 };
 
-                var res = await GetConfirmResult(config);
+                var res = await UserDialogs.Instance.ConfirmAsync(config);
 
                 if (res)
                 {
-                    _schedulerService.DeleteObject(SelectedItem);
+                    await _schedulerService.DeleteObject(SelectedItem.Id);
                     ListOfItems.Remove(SelectedItem);
                 }
             }
@@ -80,9 +93,9 @@ namespace Scheduler.ViewModel
             }
         }
 
-        private void OnAddRecordTapped()
+        private async Task OnAddRecordTapped()
         {
-            Navigation.PushModalAsync(new AddRecordPage(this));
+            await Navigation.PushModalAsync(new AddRecordPage(this));
         }
 
         private void OnEditRecordTapped()
@@ -97,9 +110,9 @@ namespace Scheduler.ViewModel
             }
         }
 
-        private async Task<bool> GetConfirmResult(ConfirmConfig config)
+        private async Task UpdateListByDate(DateTime date)
         {
-            return await UserDialogs.Instance.ConfirmAsync(config);
+            await _schedulerService.GetAll(date);
         }
     }
 }

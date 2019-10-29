@@ -9,6 +9,7 @@
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
     <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -18,12 +19,14 @@
     <Folder Include="ViewModel\" />
     <Folder Include="Enums\" />
     <Folder Include="Views\" />
+    <Folder Include="Converter\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\EmptyClass.cs" />
-    <Compile Remove="SchedulerPage.xaml.cs" />
-    <Compile Remove="Pages\SchedulerPage.xaml.cs" />
-    <Compile Remove="Pages\SchedulerPage.xaml.cs" />
+    <Compile Remove="SingleDateRecord.xaml.cs" />
+    <Compile Remove="Pages\SingleDateRecord.xaml.cs" />
+    <Compile Remove="Pages\SingleDateRecord.xaml.cs" />
     <Compile Remove="Models\Master.cs" />
     <Compile Remove="Models\MasterPage.cs" />
   </ItemGroup>
@@ -34,6 +37,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="Pages\SchedulerPage.xaml" />
+    <EmbeddedResource Remove="Pages\SingleDateRecord.xaml" />
   </ItemGroup>
 </Project>

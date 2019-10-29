@@ -1,55 +1,54 @@
-﻿using System;
+using System;
+using System.Threading.Tasks;
 using Scheduler.Models;
-using Scheduler.ScheduleService;
+using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {
     public class AddRecordPageViewModel
     {
-        private IScheduleService<ScheduleRecord> _scheduleService;
+        private IScheduleService _scheduleService;
         private ListViewPageViewModel _pg;
 
         public INavigation Navigation { get; set; }
-        public Command<object> SaveCommand { get; set; }
-        public Command<object> CancelCommand { get; set; }
+        public Command SaveCommand { get; set; }
+        public Command CancelCommand { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; } 
         public DateTime MinDate { get; set; } = DateTime.Now;
 
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
+            SaveCommand = new Command(() => OnSaveTapped());
+            CancelCommand = new Command(() => OnCancelTapped());
+            _scheduleService = new SchedulerService();
             Navigation = navigation;
-            _scheduleService = new SchedulerService<ScheduleRecord>();
-            InitializeViewModel();
 
             _pg = pg;
         }
 
-        private void InitializeViewModel()
+        private async Task OnSaveTapped()
         {
-            SaveCommand = new Command<object>(OnSaveTapped);
-            CancelCommand = new Command<object>(OnCancelTapped);
+            if (!string.IsNullOrWhiteSpace(Title))
+            {
+                await _scheduleService.AddObjectToList(new SingleDateRecord { Title = Title, TextBody = Text, Status = Enums.RecordStatuses.Scheduled });
+            }
+
+            await ReturnToPreviousPage();
         }
 
-        private void OnSaveTapped(object obj)
+        private async Task OnCancelTapped()
         {
-            if(!string.IsNullOrWhiteSpace(Title))
-            _scheduleService.AddObjectToList(new ScheduleRecord { Title = this.Title, TextBody = this.Text, ExpirationTime = this.Date });
-            ReturnToPreviousPage();
+            await ReturnToPreviousPage();
         }
 
-        private void OnCancelTapped(object obj)
+        private async Task ReturnToPreviousPage()
         {
-            ReturnToPreviousPage();
-        }
-
-        private void ReturnToPreviousPage()
-        {
-            Navigation.PopModalAsync();
-            _pg.InitializeList();
+            await Navigation.PopModalAsync();
+            await _pg.InitializeList();
         }
     }
 }

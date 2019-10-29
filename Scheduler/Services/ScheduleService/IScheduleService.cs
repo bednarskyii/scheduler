@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Scheduler.Models;
 
-namespace Scheduler.ScheduleService
+namespace Scheduler.Services
 {
-    public interface  IScheduleService<T>
+    public interface  IScheduleService
     {
-        void AddObjectToList(T record);
-        void DeleteObject(T record);
-        List<ScheduleRecord> GetAll();
+        Task AddObjectToList(SingleDateRecord record);
+        Task DeleteObject(Guid id);
+        Task<List<SingleDateRecord>> GetAll(object date = null);
     }
 }

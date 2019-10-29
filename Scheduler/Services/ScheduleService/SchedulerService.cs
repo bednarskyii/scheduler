@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Scheduler.Models;
 
-namespace Scheduler.ScheduleService
+namespace Scheduler.Services
 {
-    public class SchedulerService<T> :  IScheduleService<T>
+    public class SchedulerService :  IScheduleService
     {
-        public void AddObjectToList(T record)
+        public async Task AddObjectToList(SingleDateRecord record)
         {
-            CancerDatabase.listOfObjectsMoq.Add(record as ScheduleRecord);
+            record.Id = Guid.NewGuid();
+            await App.Database.SaveItemAsync(record);
         }
 
-        public void DeleteObject(T record)
+        public async Task DeleteObject(Guid id)
         {
-            CancerDatabase.listOfObjectsMoq.Remove(record as ScheduleRecord);
+            await App.Database.DeleteItemAsync(id);
         }
 
-        public List<ScheduleRecord> GetAll()
+        public async Task<List<SingleDateRecord>> GetAll(object date)
         {
-            return CancerDatabase.listOfObjectsMoq;
+            DateTime day = (DateTime)date;
+            return await App.Database.GetAllAsync(day);
         }
     }
 }

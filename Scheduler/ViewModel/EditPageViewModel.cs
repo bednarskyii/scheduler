@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
+using Scheduler.Converter;
 using Scheduler.Enums;
 using Scheduler.Models;
-using Scheduler.ScheduleService;
+using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
@@ -14,24 +14,27 @@ namespace Scheduler.ViewModel
         public INavigation Navigation { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime Date { get; set; }
         public DateTime MinDate { get; set; } = DateTime.Now;
+        public IList<RecordStatuses> ListOfStatuses { get; set; }
         public string SelectedStatus { get; set; }
-        public IList<string> ListOfStatuses { get; set; }
+        public int SelectedStatusIndex { get; set; }
 
+        public Command SaveCommand { get; set; }
+        public Command CancelCommand { get; set; }
 
-        public Command<object> SaveCommand { get; set; }
-        public Command<object> CancelCommand { get; set; }
-
-
-        private ScheduleRecord _currentObject;
+        private IValueConverter _statusConverter;
+        private SingleDateRecord _currentObject;
         private ListViewPageViewModel _pg;
-        private IScheduleService<ScheduleRecord> _scheduleService;
+        private IScheduleService _scheduleService;
+        private IList<RecordStatuses> _requiredStatuses;
 
 
-        public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, ScheduleRecord currentObject)
+        public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, SingleDateRecord currentObject)
         {
-            _scheduleService = new SchedulerService<ScheduleRecord>();
+            _statusConverter = new EnumToStringWithSpacesConverter();
+            _scheduleService = new SchedulerService();
+            _requiredStatuses = new List<RecordStatuses>();
             _currentObject = currentObject;
             _pg = pg;
             Navigation = navigation;
@@ -40,20 +43,32 @@ namespace Scheduler.ViewModel
 
         private void InitializeViewModel()
         {
-            SaveCommand = new Command<object>(OnSaveTapped);
-            CancelCommand = new Command<object>(OnCancelTapped);
+            SelectRequiredStatuses();
+
+            SaveCommand = new Command(OnSaveTapped);
+            CancelCommand = new Command(OnCancelTapped);
             Title = _currentObject.Title;
             Text = _currentObject.TextBody;
             Date = _currentObject.ExpirationTime;
             SelectedStatus = _currentObject.Status.ToString();
-            ListOfStatuses = AddWhiteSpaces( Enum.GetNames(typeof(RecordStatuses)).ToList() );
+            ListOfStatuses = _requiredStatuses;
+
+        }
+
+        private void SelectRequiredStatuses()
+        {
+            _requiredStatuses.Add(RecordStatuses.Canceled);
+            _requiredStatuses.Add(RecordStatuses.Done);
+            _requiredStatuses.Add(RecordStatuses.InProgress);
+            _requiredStatuses.Add(RecordStatuses.OnHold);
+            _requiredStatuses.Add(RecordStatuses.Scheduled);
         }
 
         private void OnSaveTapped(object obj)
         {
-            _scheduleService.DeleteObject(_currentObject);
+            _scheduleService.DeleteObject(_currentObject.Id);
 
-            ScheduleRecord updatedRecord = GetUpdatedObject(_currentObject);
+            SingleDateRecord updatedRecord = GetUpdatedObject(_currentObject);
             _scheduleService.AddObjectToList(updatedRecord);
             ReturnToPreviousPage();
         }
@@ -69,38 +84,15 @@ namespace Scheduler.ViewModel
             _pg.InitializeList();
         }
 
-        private ScheduleRecord GetUpdatedObject(ScheduleRecord curObject)
+        private SingleDateRecord GetUpdatedObject(SingleDateRecord curObject)
         {
             curObject.ExpirationTime = Date;
             curObject.TextBody = Text;
             curObject.Title = Title;
 
-            SelectedStatus = SelectedStatus.Replace(" ", "");
-            Enum.TryParse(SelectedStatus, out RecordStatuses statusValue);
-            curObject.Status = statusValue;
+            curObject.Status = (RecordStatuses)_statusConverter.ConvertBack(SelectedStatus, typeof(RecordStatuses), null, CultureInfo.InvariantCulture);
 
             return curObject;
-        }
-
-        private List<string> AddWhiteSpaces(List<string> curList)
-        {
-            List<string> modefiedList = new List<string>();
-            foreach (string item in curList)
-            {
-                switch (item)
-                {
-                    case "InProgress":
-                        modefiedList.Add("In Progress");
-                        break;
-                    case "OnHold":
-                        modefiedList.Add("On Hold");
-                        break;
-                    default:
-                        modefiedList.Add(item);
-                        break;
-                }
-            }
-            return modefiedList;
         }
     }
 }

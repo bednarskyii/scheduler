@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Scheduler.Data;
 using Scheduler.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,11 +9,25 @@ namespace Scheduler
 {
     public partial class App : Application
     {
+        static ItemDatabase database;
+
         public App()
         {
             InitializeComponent();
 
             MainPage = new MainPage();
+        }
+
+        public static ItemDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new ItemDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Scheduler.db3"));
+                }
+                return database;
+            }
         }
 
         protected override void OnStart()

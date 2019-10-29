@@ -3,84 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scheduler.Pages.ListViewPage"
              Title="Schedule"
-             xmlns:views="clr-namespace:Scheduler.Views">
+             xmlns:views="clr-namespace:Scheduler.Views"
+             xmlns:converters="clr-namespace:Scheduler.Converter;assembly=Scheduler">
 
-    <StackLayout Spacing="10" x:Name="layout" Padding="8,10">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StatusToColorConverter x:Key="statusToColorConverter" />
+            <converters:SingleEnumToStrWithSpacesConverter x:Key="singleStatusToString" />
+        </ResourceDictionary>
 
-        <views:Calendar/>
+    </ContentPage.Resources>
 
-        <!--<Label Text="September"></Label>
+        <StackLayout Spacing="10" x:Name="layout" Padding="8,10">
 
-        <Grid WidthRequest="100"
-              HeightRequest="500"
-              Margin="20"
-              x:Name="controlGrid">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Grid.Row="0" BackgroundColor="AliceBlue" Text="1"></Button>
-            <Button Grid.Column="1" Grid.Row="0" BackgroundColor="AliceBlue" Text="2"></Button>
-            <Button Grid.Column="2" Grid.Row="0" BackgroundColor="AliceBlue" Text="3"></Button>
-            <Button Grid.Column="3" Grid.Row="0" BackgroundColor="AliceBlue" Text="4"></Button>
-            <Button Grid.Column="4" Grid.Row="0" BackgroundColor="AliceBlue" Text="5"></Button>
-            <Button Grid.Column="5" Grid.Row="0" BackgroundColor="AliceBlue" Text="6"></Button>
-            <Button Grid.Column="6" Grid.Row="0" BackgroundColor="AliceBlue" Text="7"></Button>
-            <Button Grid.Column="0" Grid.Row="1" BackgroundColor="AliceBlue" Text="8"></Button>
-            <Button Grid.Column="1" Grid.Row="1" BackgroundColor="AliceBlue" Text="9"></Button>
-            <Button Grid.Column="2" Grid.Row="1" BackgroundColor="AliceBlue" Text="10"></Button>
-            <Button Grid.Column="3" Grid.Row="1" BackgroundColor="AliceBlue" Text="11"></Button>
-            <Button Grid.Column="4" Grid.Row="1" BackgroundColor="AliceBlue" Text="12"></Button>
-            <Button Grid.Column="5" Grid.Row="1" BackgroundColor="AliceBlue" Text="13"></Button>
-            <Button Grid.Column="6" Grid.Row="1" BackgroundColor="AliceBlue" Text="14"></Button>
-            <Button Grid.Column="0" Grid.Row="2" BackgroundColor="AliceBlue" Text="1"></Button>
-            <Button Grid.Column="1" Grid.Row="2" BackgroundColor="AliceBlue" Text="2"></Button>
-            <Button Grid.Column="2" Grid.Row="2" BackgroundColor="AliceBlue" Text="3"></Button>
-            <Button Grid.Column="3" Grid.Row="2" BackgroundColor="AliceBlue" Text="4"></Button>
-            <Button Grid.Column="4" Grid.Row="2" BackgroundColor="AliceBlue" Text="5"></Button>
-            <Button Grid.Column="5" Grid.Row="2" BackgroundColor="AliceBlue" Text="6"></Button>
-            <Button Grid.Column="6" Grid.Row="2" BackgroundColor="AliceBlue" Text="7"></Button>
-            <Button Grid.Column="0" Grid.Row="3" BackgroundColor="AliceBlue" Text="8"></Button>
-            <Button Grid.Column="1" Grid.Row="3" BackgroundColor="AliceBlue" Text="9"></Button>
-            <Button Grid.Column="2" Grid.Row="3" BackgroundColor="AliceBlue" Text="10"></Button>
-            <Button Grid.Column="3" Grid.Row="3" BackgroundColor="AliceBlue" Text="11"></Button>
-            <Button Grid.Column="4" Grid.Row="3" BackgroundColor="AliceBlue" Text="12"></Button>
-            <Button Grid.Column="5" Grid.Row="3" BackgroundColor="AliceBlue" Text="13"></Button>
-            <Button Grid.Column="6" Grid.Row="3" BackgroundColor="AliceBlue" Text="14"></Button>
-            <Button Grid.Column="0" Grid.Row="4" BackgroundColor="AliceBlue" Text="8"></Button>
-            <Button Grid.Column="1" Grid.Row="4" BackgroundColor="AliceBlue" Text="9"></Button>
-            <Button Grid.Column="2" Grid.Row="4" BackgroundColor="AliceBlue" Text="10"></Button>
-            <Button Grid.Column="3" Grid.Row="4" BackgroundColor="AliceBlue" Text="11"></Button>
-            <Button Grid.Column="4" Grid.Row="4" BackgroundColor="AliceBlue" Text="12"></Button>
-            <Button Grid.Column="5" Grid.Row="4" BackgroundColor="AliceBlue" Text="13"></Button>
-            <Button Grid.Column="6" Grid.Row="4" BackgroundColor="AliceBlue" Text="14"></Button>
-            <Button Grid.Column="0" Grid.Row="5" BackgroundColor="AliceBlue" Text="8"></Button>
-            <Button Grid.Column="1" Grid.Row="5" BackgroundColor="AliceBlue" Text="9"></Button>
-            <Button Grid.Column="2" Grid.Row="5" BackgroundColor="AliceBlue" Text="10"></Button>
-            <Button Grid.Column="3" Grid.Row="5" BackgroundColor="AliceBlue" Text="11"></Button>
-            <Button Grid.Column="4" Grid.Row="5" BackgroundColor="AliceBlue" Text="12"></Button>
-            <Button Grid.Column="5" Grid.Row="5" BackgroundColor="AliceBlue" Text="13"></Button>
-            <Button Grid.Column="6" Grid.Row="5" BackgroundColor="AliceBlue" Text="14"></Button>
-
-        </Grid>-->
-
-
+        <views:Calendar SelectedDay="{Binding SelectedDay}"/>
 
         <ListView
             SeparatorVisibility="None"
@@ -94,9 +30,9 @@
                             <StackLayout Orientation="Vertical" Padding="10">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
-                                    <Frame BorderColor="Red" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
-                                        <Label Text="{Binding Status}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
-                                               VerticalOptions="CenterAndExpand"/>
+                                    <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
+                                        <Label Text="{Binding Status, Converter={StaticResource singleStatusToString}}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
+                                               VerticalOptions="CenterAndExpand" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}"/>
                                     </Frame>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">

@@ -6,6 +6,6 @@ namespace Scheduler
 {
     public static class CancerDatabase
     {
-        public static List<ScheduleRecord> listOfObjectsMoq = new List<ScheduleRecord>();
+        public static List<SingleDateRecord> listOfObjectsMoq = new List<SingleDateRecord>();
     }
 }
