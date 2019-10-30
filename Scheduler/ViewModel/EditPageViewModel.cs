@@ -11,24 +11,22 @@ namespace Scheduler.ViewModel
 {
     public class EditPageViewModel
     {
+        public IList<RecordStatuses> ListOfStatuses { get; set; }
         public INavigation Navigation { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime MinDate { get; set; } = DateTime.Now;
-        public IList<RecordStatuses> ListOfStatuses { get; set; }
         public string SelectedStatus { get; set; }
         public int SelectedStatusIndex { get; set; }
-
+        public DateTime Date { get; set; }
+        public DateTime MinDate { get; set; } = DateTime.Now;
         public Command SaveCommand { get; set; }
         public Command CancelCommand { get; set; }
 
         private IValueConverter _statusConverter;
-        private SingleDateRecord _currentObject;
-        private ListViewPageViewModel _pg;
         private IScheduleService _scheduleService;
         private IList<RecordStatuses> _requiredStatuses;
-
+        private SingleDateRecord _currentObject;
+        private ListViewPageViewModel _pg;
 
         public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, SingleDateRecord currentObject)
         {
@@ -66,10 +64,10 @@ namespace Scheduler.ViewModel
 
         private void OnSaveTapped(object obj)
         {
-            _scheduleService.DeleteObject(_currentObject.Id);
+            _scheduleService.DeleteObjectAsync(_currentObject.Id);
 
             SingleDateRecord updatedRecord = GetUpdatedObject(_currentObject);
-            _scheduleService.AddObjectToList(updatedRecord);
+            _scheduleService.AddObjectToListAsync(updatedRecord);
             ReturnToPreviousPage();
         }
 
@@ -86,7 +84,7 @@ namespace Scheduler.ViewModel
 
         private SingleDateRecord GetUpdatedObject(SingleDateRecord curObject)
         {
-            curObject.ExpirationTime = Date;
+            curObject.ExpirationTime = Date.Date;
             curObject.TextBody = Text;
             curObject.Title = Title;
 

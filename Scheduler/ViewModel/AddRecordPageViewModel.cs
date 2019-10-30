@@ -34,7 +34,7 @@ namespace Scheduler.ViewModel
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
-                await _scheduleService.AddObjectToList(new SingleDateRecord { Title = Title, TextBody = Text, Status = Enums.RecordStatuses.Scheduled });
+                await _scheduleService.AddObjectToListAsync(new SingleDateRecord { Title = Title, TextBody = Text, Status = Enums.RecordStatuses.Scheduled, ExpirationTime = Date.Date });
             }
 
             await ReturnToPreviousPage();

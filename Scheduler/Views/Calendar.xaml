@@ -4,48 +4,66 @@
              x:Class="Scheduler.Views.Calendar">
 
     <ContentView.Content>
-        <StackLayout>
-            <Grid x:Name="TitleCalendarArea" Padding="10" HeightRequest="40">
+        <Frame BorderColor="Black" Padding="0" HasShadow="True">
+        <StackLayout Padding="0">
+            <Grid x:Name="TitleCalendarArea" HeightRequest="25" VerticalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                     <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
                 <Button Text="Previous"
                         Clicked="OnPreviousMonthClicked"
-                        HorizontalOptions="StartAndExpand"
-                        Grid.Column="0"/>
-                <Label x:Name="MonthLable" HorizontalOptions="CenterAndExpand" Grid.Column="1"></Label>
+                        HorizontalOptions="CenterAndExpand"
+                        Grid.Column="0"
+                        TextColor="Black"
+                        HeightRequest="30"/>
+                <Label x:Name="MonthLable"
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Column="1"
+                       VerticalOptions="CenterAndExpand"/>
                 <Button Text="Next"
                         Clicked="OnNextMonthClicked"
-                        HorizontalOptions="EndAndExpand"
-                        Grid.Column="2"/>
+                        HorizontalOptions="CenterAndExpand"
+                        Grid.Column="2"
+                        TextColor="Black"
+                        HeightRequest="30"/>
             </Grid>
 
-            <Grid HorizontalOptions="CenterAndExpand" HeightRequest="40">
+        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="Black">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="40"/>
-                 </Grid.ColumnDefinitions>
+          <StackLayout>
 
-                <Label Text="Mn" Grid.Column="0" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="Tu" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="We" Grid.Column="2" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="Th" Grid.Column="3" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="Fr" Grid.Column="4" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="St" Grid.Column="5" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
-                <Label Text="Sa" Grid.Column="6" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
+                <Grid HorizontalOptions="CenterAndExpand" Margin="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                     </Grid.ColumnDefinitions>
 
-            </Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
 
-        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280">
+                  <Label Text="Mn" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                  <Label Text="Tu" Grid.Column="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                  <Label Text="We" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                  <Label Text="Th" Grid.Column="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                  <Label Text="Fr" Grid.Column="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                  <Label Text="St" Grid.Column="5" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
+                  <Label Text="Sa" Grid.Column="6" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
+
+                </Grid>
+
            <Grid x:Name="CalendarArea" HorizontalOptions="CenterAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
@@ -66,10 +84,10 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
         </Grid>
-
+          </StackLayout>
         </Frame>
         </StackLayout>
-
+        </Frame>
     </ContentView.Content>
 
 

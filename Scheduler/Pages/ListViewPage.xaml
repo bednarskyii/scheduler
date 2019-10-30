@@ -14,7 +14,7 @@
 
     </ContentPage.Resources>
 
-        <StackLayout Spacing="10" x:Name="layout" Padding="8,10">
+        <StackLayout Spacing="10" x:Name="layout" Padding="8,10" >
 
         <views:Calendar SelectedDay="{Binding SelectedDay}"/>
 
@@ -27,20 +27,22 @@
             <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Vertical" Padding="10">
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
-                                    <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
-                                        <Label Text="{Binding Status, Converter={StaticResource singleStatusToString}}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
-                                               VerticalOptions="CenterAndExpand" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}"/>
-                                    </Frame>
+                            <Frame BorderColor="Black" CornerRadius="20" Margin="0,0,0,5" HasShadow="False">   
+                                <StackLayout Orientation="Vertical" Padding="10" BackgroundColor="White">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
+                                        <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
+                                            <Label Text="{Binding Status, Converter={StaticResource singleStatusToString}}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
+                                                   VerticalOptions="CenterAndExpand" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}"/>
+                                        </Frame>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding TextBody}" HorizontalOptions="StartAndExpand"  FontSize="Micro" TextColor="Gray"/>
+                                        <!--<Label Text="{Binding ExpirationTime, StringFormat='{0:MMMM dd}'}" HorizontalOptions="End" HorizontalTextAlignment="End"
+                                               FontSize="Small" TextColor="Chocolate" WidthRequest="100" VerticalOptions="StartAndExpand"/>-->
+                                    </StackLayout>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding TextBody}" HorizontalOptions="StartAndExpand"  FontSize="Micro" TextColor="Gray"/>
-                                    <Label Text="{Binding ExpirationTime, StringFormat='{0:MMMM dd}'}" HorizontalOptions="End" HorizontalTextAlignment="End"
-                                           FontSize="Small" TextColor="Chocolate" WidthRequest="100" VerticalOptions="StartAndExpand"/>
-                                </StackLayout>
-                            </StackLayout>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -51,9 +53,15 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
              </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+             </Grid.RowDefinitions>
+
+
              <Button Text="Add record"
                      Command="{Binding AddRecordCommand}"
-                     TextColor="Green" />
+                     TextColor="Black"/>
              <Button Grid.Column="1"
                      Text="Edit record"
                      Command="{Binding EditRecordCommand}"

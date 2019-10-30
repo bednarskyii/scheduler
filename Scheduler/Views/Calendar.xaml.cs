@@ -6,8 +6,8 @@ namespace Scheduler.Views
 {
     public partial class Calendar : ContentView
     {
+        private Button _selectedDayButton;
         private DateTime _selectedDate { get; set; } = DateTime.Now;
-        private DateTime _selectedDay { get; set; } = DateTime.Now;
 
         public static readonly BindableProperty SelectedDayProperty = BindableProperty.Create(
                                                          propertyName: "SelectedDay",
@@ -55,11 +55,14 @@ namespace Scheduler.Views
 
                     Button button = new Button()
                     {
-                            BackgroundColor = currentDay == DateTime.Today ? Color.LightSkyBlue : Color.White,
-                            Text = currentDay.Day.ToString(),
-                            TextColor = currentDay.Month == month ? Color.Black : Color.Gray,
-                            CommandParameter = currentDay.Date
-                        };
+                        BackgroundColor = Color.Black,
+                        BorderColor = currentDay == DateTime.Today ? Color.White : Color.Black,
+                        BorderWidth = 2.0,
+                        CornerRadius = 10,
+                        Text = currentDay.Day.ToString(),
+                        TextColor = currentDay.Month == month ? Color.White : Color.WhiteSmoke,
+                        CommandParameter = currentDay.Date
+                     };
 
                     if (j == 5 || j == 6)
                         button.TextColor = Color.Gray;
@@ -74,27 +77,36 @@ namespace Scheduler.Views
         private void OnNextMonthClicked(object sender, EventArgs e)
         {
             _selectedDate = _selectedDate.AddMonths(1) ;
-            CalendarArea.Children.Clear();
-            FillCalendar(_selectedDate.Month, _selectedDate.Year);
+            CleanCalendar();
         }
 
         private void OnPreviousMonthClicked(object sender, EventArgs e)
         {
             _selectedDate = _selectedDate.AddMonths(-1);
-            CalendarArea.Children.Clear();
-            FillCalendar(_selectedDate.Month, _selectedDate.Year);
+            CleanCalendar();
         }
 
         private void OnDayClicked(object sender, EventArgs e)
         {
-            var button = (Button)sender;
-            DateTime date = (DateTime)button.CommandParameter;
+            if(_selectedDayButton != null)
+            {
+                _selectedDayButton.BackgroundColor = Color.Black;
+            }
+            _selectedDayButton = (Button)sender;
+            DateTime date = (DateTime)_selectedDayButton.CommandParameter;
+            _selectedDayButton.BackgroundColor = Color.DarkGray;
             SelectedDay = date;
         }
 
         private static void OnSelectedDayChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            //q
+            //TODO: add border to selected Item
+        }
+
+        private void CleanCalendar()
+        {
+            CalendarArea.Children.Clear();
+            FillCalendar(_selectedDate.Month, _selectedDate.Year);
         }
 
     }

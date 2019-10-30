@@ -38,7 +38,7 @@ namespace Scheduler.ViewModel
             set
             {
                 _selectedDay = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedDay)));
+                _ = InitializeList();
             }
             get
             {
@@ -64,8 +64,7 @@ namespace Scheduler.ViewModel
 
         public async Task InitializeList()
         {
-            ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetAll(_selectedDay));
-
+             ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetRecordAsync(_selectedDay));
         }
 
         private async Task OnDeleteTapped()
@@ -83,7 +82,7 @@ namespace Scheduler.ViewModel
 
                 if (res)
                 {
-                    await _schedulerService.DeleteObject(SelectedItem.Id);
+                    await _schedulerService.DeleteObjectAsync(SelectedItem.Id);
                     ListOfItems.Remove(SelectedItem);
                 }
             }
@@ -108,11 +107,6 @@ namespace Scheduler.ViewModel
             {
                 UserDialogs.Instance.Alert("Select an item, please");
             }
-        }
-
-        private async Task UpdateListByDate(DateTime date)
-        {
-            await _schedulerService.GetAll(date);
         }
     }
 }

@@ -7,21 +7,20 @@ namespace Scheduler.Services
 {
     public class SchedulerService :  IScheduleService
     {
-        public async Task AddObjectToList(SingleDateRecord record)
+        public async Task AddObjectToListAsync(SingleDateRecord record)
         {
             record.Id = Guid.NewGuid();
             await App.Database.SaveItemAsync(record);
         }
 
-        public async Task DeleteObject(Guid id)
+        public async Task DeleteObjectAsync(Guid id)
         {
-            await App.Database.DeleteItemAsync(id);
+            await App.Database.DeleteItemByIdAsync(id);
         }
 
-        public async Task<List<SingleDateRecord>> GetAll(object date)
+        public async Task<List<SingleDateRecord>> GetRecordAsync(object date)
         {
-            DateTime day = (DateTime)date;
-            return await App.Database.GetAllAsync(day);
+            return await App.Database.GetRecordsAsync(date);
         }
     }
 }

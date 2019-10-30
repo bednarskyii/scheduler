@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using Scheduler.Models;
 using SQLite;
 
@@ -16,9 +17,18 @@ namespace Scheduler.Data
             database.CreateTableAsync<SingleDateRecord>().Wait();
         }
 
-        public async Task<List<SingleDateRecord>> GetAllAsync(DateTime date)
+        public async Task<List<SingleDateRecord>> GetRecordsAsync(object date = null)
         {
-            return await database.Table<SingleDateRecord>().Where( (i) => i.ExpirationTime.Date == date.Date).ToListAsync();
+            if (date != null)
+            {
+                DateTime unboxedDate = (DateTime)date;
+                unboxedDate = unboxedDate.Date;
+                return await database.Table<SingleDateRecord>().Where( (i) => i.ExpirationTime == unboxedDate ).ToListAsync();
+            }
+            else
+            {
+                return await database.Table<SingleDateRecord>().ToListAsync();
+            }
         }
 
         public Task<int> SaveItemAsync(SingleDateRecord item)
@@ -26,7 +36,7 @@ namespace Scheduler.Data
             return database.InsertAsync(item);
         }
 
-         public async Task<int> DeleteItemAsync(Guid id)
+         public async Task<int> DeleteItemByIdAsync(Guid id)
         {
             return await database.Table<SingleDateRecord>().Where(i => i.Id == id).DeleteAsync();
         }
