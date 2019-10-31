@@ -18,6 +18,7 @@ namespace Scheduler.ViewModel
         public string Title { get; set; }
         public DateTime Date { get; set; } 
         public DateTime MinDate { get; set; } = DateTime.Now;
+        public TimeSpan SelectedTime { get; set; }
 
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
@@ -48,7 +49,7 @@ namespace Scheduler.ViewModel
         private async Task ReturnToPreviousPage()
         {
             await Navigation.PopModalAsync();
-            await _pg.InitializeList();
+            await _pg.InitializeListWithDate();
         }
     }
 }

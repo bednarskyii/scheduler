@@ -10,9 +10,40 @@
         <Editor Placeholder="Enter additional text"
                 Text="{Binding Text}"
                 HeightRequest="100" />
-        <Label Text="Date:" FontSize="Medium"/>
+
+        <Label Text="Date:"
+               FontSize="Medium"/>
         <DatePicker MinimumDate="{Binding MinDate}"
                     Date="{Binding Date}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+
+            <Label Text="Start time:"
+                   FontSize="Medium"
+                   Grid.Column="0"
+                   Grid.Row="0"/>
+            <TimePicker Time="{Binding SelectedTime}"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+
+            <Label Text="End time:"
+                   FontSize="Medium"
+                   Grid.Column="1"
+                   Grid.Row="0"/>
+            <TimePicker Time="{Binding SelectedTime}"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+        </Grid>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

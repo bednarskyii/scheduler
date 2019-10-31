@@ -79,7 +79,7 @@ namespace Scheduler.ViewModel
         private void ReturnToPreviousPage()
         {
             Navigation.PopModalAsync();
-            _pg.InitializeList();
+            _pg.InitializeListWithDate();
         }
 
         private SingleDateRecord GetUpdatedObject(SingleDateRecord curObject)

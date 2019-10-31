@@ -27,9 +27,9 @@
             <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame BorderColor="Black" CornerRadius="20" Margin="0,0,0,5" HasShadow="False">   
+                            <Frame BorderColor="Black" CornerRadius="20" Margin="0,0,0,5" HasShadow="False" Padding="0">   
                                 <StackLayout Orientation="Vertical" Padding="10" BackgroundColor="White">
-                                    <StackLayout Orientation="Horizontal">
+                                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0">
                                         <Label Text="{Binding Title}" HorizontalOptions="StartAndExpand"  FontSize="Title"/>
                                         <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="15" HasShadow="False">
                                             <Label Text="{Binding Status, Converter={StaticResource singleStatusToString}}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="Small" WidthRequest="100"
@@ -38,8 +38,8 @@
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="{Binding TextBody}" HorizontalOptions="StartAndExpand"  FontSize="Micro" TextColor="Gray"/>
-                                        <!--<Label Text="{Binding ExpirationTime, StringFormat='{0:MMMM dd}'}" HorizontalOptions="End" HorizontalTextAlignment="End"
-                                               FontSize="Small" TextColor="Chocolate" WidthRequest="100" VerticalOptions="StartAndExpand"/>-->
+                                        <Label Text="{Binding ExpirationTime, StringFormat='{0:MMMM dd}'}" HorizontalOptions="End" HorizontalTextAlignment="End"
+                                               FontSize="Small" TextColor="Black" WidthRequest="100" VerticalOptions="StartAndExpand"/>
                                     </StackLayout>
                                 </StackLayout>
                             </Frame>

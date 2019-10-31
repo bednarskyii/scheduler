@@ -38,7 +38,7 @@ namespace Scheduler.ViewModel
             set
             {
                 _selectedDay = value;
-                _ = InitializeList();
+                _ = InitializeListWithDate();
             }
             get
             {
@@ -59,10 +59,10 @@ namespace Scheduler.ViewModel
 
             Navigation = navigation;
 
-            InitializeList();
+            InitializeListWithDate();
         }
 
-        public async Task InitializeList()
+        public async Task InitializeListWithDate()
         {
              ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetRecordAsync(_selectedDay));
         }

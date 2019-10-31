@@ -60,7 +60,7 @@ namespace Scheduler.Views
                         BorderWidth = 2.0,
                         CornerRadius = 10,
                         Text = currentDay.Day.ToString(),
-                        TextColor = currentDay.Month == month ? Color.White : Color.WhiteSmoke,
+                        TextColor = currentDay.Month == month ? Color.White : Color.Gray,
                         CommandParameter = currentDay.Date
                      };
 
