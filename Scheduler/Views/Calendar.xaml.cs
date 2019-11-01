@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.Views
@@ -8,13 +10,14 @@ namespace Scheduler.Views
     {
         private Button _selectedDayButton;
         private DateTime _selectedDate { get; set; } = DateTime.Now;
+        private IScheduleService _scheduleService;
 
         public static readonly BindableProperty SelectedDayProperty = BindableProperty.Create(
                                                          propertyName: "SelectedDay",
+                                                         defaultValue: DateTime.Today,
                                                          returnType: typeof(DateTime),
                                                          declaringType: typeof(Calendar),
-                                                         defaultBindingMode: BindingMode.OneWayToSource,
-                                                         propertyChanged: OnSelectedDayChanged);
+                                                         defaultBindingMode: BindingMode.OneWayToSource);
 
         public DateTime SelectedDay
         {
@@ -24,11 +27,12 @@ namespace Scheduler.Views
 
         public Calendar()
         {
+            _scheduleService = new SchedulerService();
             InitializeComponent();
             FillCalendar(_selectedDate.Month, _selectedDate.Year);
         }
 
-        private void FillCalendar(int month, int year)
+        private async Task FillCalendar(int month, int year)
         {
             int counter = 0;
             DateTime monthStart = new DateTime(year, month, 1);
@@ -55,12 +59,12 @@ namespace Scheduler.Views
 
                     Button button = new Button()
                     {
-                        BackgroundColor = Color.Black,
-                        BorderColor = currentDay == DateTime.Today ? Color.White : Color.Black,
+                        BackgroundColor = Color.Transparent,
+                        BorderColor = currentDay == DateTime.Today ? Color.Black : Color.Transparent,
                         BorderWidth = 2.0,
                         CornerRadius = 10,
                         Text = currentDay.Day.ToString(),
-                        TextColor = currentDay.Month == month ? Color.White : Color.Gray,
+                        TextColor = currentDay.Month == month ? Color.Black : Color.Gray,
                         CommandParameter = currentDay.Date
                      };
 
@@ -69,7 +73,14 @@ namespace Scheduler.Views
 
                     button.Clicked += OnDayClicked;
 
+                    if (await _scheduleService.IsDateHasRecords(currentDay.Date))
+                    {
+                        //TODO change this logic to more effective 
+                        CalendarArea.Children.Add(new Label { Text = ".", TextColor = Color.Red, Margin = 3, FontSize = 30, HorizontalOptions = LayoutOptions.CenterAndExpand }, j, i);
+                    }
+
                     CalendarArea.Children.Add(button, j, i);
+
                 }
             }
         }
@@ -90,17 +101,12 @@ namespace Scheduler.Views
         {
             if(_selectedDayButton != null)
             {
-                _selectedDayButton.BackgroundColor = Color.Black;
+                _selectedDayButton.BackgroundColor = Color.Transparent;
             }
             _selectedDayButton = (Button)sender;
             DateTime date = (DateTime)_selectedDayButton.CommandParameter;
             _selectedDayButton.BackgroundColor = Color.DarkGray;
             SelectedDay = date;
-        }
-
-        private static void OnSelectedDayChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            //TODO: add border to selected Item
         }
 
         private void CleanCalendar()

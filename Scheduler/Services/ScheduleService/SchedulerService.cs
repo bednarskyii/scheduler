@@ -22,5 +22,10 @@ namespace Scheduler.Services
         {
             return await App.Database.GetRecordsAsync(date);
         }
+
+        public Task<bool> IsDateHasRecords(DateTime date)
+        {
+            return App.Database.IsDateHasRecords(date);
+        }
     }
 }

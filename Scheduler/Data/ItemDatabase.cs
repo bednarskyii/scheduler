@@ -40,5 +40,16 @@ namespace Scheduler.Data
         {
             return await database.Table<SingleDateRecord>().Where(i => i.Id == id).DeleteAsync();
         }
+
+        public async Task<bool> IsDateHasRecords(DateTime date)
+        {
+            int t = await database.Table<SingleDateRecord>().Where((i) => i.ExpirationTime == date).CountAsync();
+
+            if (t == 0)
+                return false;
+
+            else
+                return true;
+        }
     }
 }

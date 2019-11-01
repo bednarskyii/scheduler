@@ -64,7 +64,8 @@ namespace Scheduler.ViewModel
 
         public async Task InitializeListWithDate()
         {
-             ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetRecordAsync(_selectedDay));
+            ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetRecordAsync(_selectedDay));
+
         }
 
         private async Task OnDeleteTapped()

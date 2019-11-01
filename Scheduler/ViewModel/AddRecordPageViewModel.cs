@@ -18,7 +18,8 @@ namespace Scheduler.ViewModel
         public string Title { get; set; }
         public DateTime Date { get; set; } 
         public DateTime MinDate { get; set; } = DateTime.Now;
-        public TimeSpan SelectedTime { get; set; }
+        public TimeSpan SelectedStartTime { get; set; }
+        public TimeSpan SelectedEndTime { get; set; }
 
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
@@ -35,7 +36,12 @@ namespace Scheduler.ViewModel
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
-                await _scheduleService.AddObjectToListAsync(new SingleDateRecord { Title = Title, TextBody = Text, Status = Enums.RecordStatuses.Scheduled, ExpirationTime = Date.Date });
+                await _scheduleService.AddObjectToListAsync(new SingleDateRecord { Title = Title,
+                                                                                   TextBody = Text,
+                                                                                   Status = Enums.RecordStatuses.Scheduled,
+                                                                                   ExpirationTime = Date.Date,
+                                                                                   StartTime = SelectedStartTime,
+                                                                                   EndTime = SelectedEndTime});
             }
 
             await ReturnToPreviousPage();

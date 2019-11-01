@@ -31,7 +31,7 @@
                    FontSize="Medium"
                    Grid.Column="0"
                    Grid.Row="0"/>
-            <TimePicker Time="{Binding SelectedTime}"
+            <TimePicker Time="{Binding SelectedStartTime}"
                         Grid.Column="0"
                         Grid.Row="1"/>
 
@@ -39,7 +39,7 @@
                    FontSize="Medium"
                    Grid.Column="1"
                    Grid.Row="0"/>
-            <TimePicker Time="{Binding SelectedTime}"
+            <TimePicker Time="{Binding SelectedEndTime}"
                         Grid.Column="1"
                         Grid.Row="1"/>
         </Grid>

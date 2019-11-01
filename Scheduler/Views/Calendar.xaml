@@ -8,13 +8,13 @@
         <StackLayout Padding="0">
             <Grid x:Name="TitleCalendarArea" HeightRequest="25" VerticalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0,3*"/>
+                    <ColumnDefinition Width="0,4*"/>
+                    <ColumnDefinition Width="0,3*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                     <RowDefinition Height="30"/>
+                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
                 <Button Text="Previous"
@@ -22,7 +22,8 @@
                         HorizontalOptions="CenterAndExpand"
                         Grid.Column="0"
                         TextColor="Black"
-                        HeightRequest="30"/>
+                        HeightRequest="30"
+                        BackgroundColor="Transparent"/>
                 <Label x:Name="MonthLable"
                        HorizontalOptions="CenterAndExpand"
                        Grid.Column="1"
@@ -32,10 +33,11 @@
                         HorizontalOptions="CenterAndExpand"
                         Grid.Column="2"
                         TextColor="Black"
-                        HeightRequest="30"/>
+                        HeightRequest="30"
+                        BackgroundColor="Transparent"/>
             </Grid>
 
-        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="Black">
+        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="#F3F3F3">
 
           <StackLayout>
 
@@ -54,11 +56,11 @@
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                  <Label Text="Mn" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-                  <Label Text="Tu" Grid.Column="1" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-                  <Label Text="We" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-                  <Label Text="Th" Grid.Column="3" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-                  <Label Text="Fr" Grid.Column="4" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+                  <Label Text="Mn" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="Tu" Grid.Column="1" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="We" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="Th" Grid.Column="3" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="Fr" Grid.Column="4" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
                   <Label Text="St" Grid.Column="5" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
                   <Label Text="Sa" Grid.Column="6" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
 

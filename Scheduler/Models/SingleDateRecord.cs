@@ -10,5 +10,7 @@ namespace Scheduler.Models
         public string TextBody { set; get; }
         public DateTime ExpirationTime { set; get; }
         public RecordStatuses Status { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
     }
 }

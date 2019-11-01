@@ -10,5 +10,6 @@ namespace Scheduler.Services
         Task AddObjectToListAsync(SingleDateRecord record);
         Task DeleteObjectAsync(Guid id);
         Task<List<SingleDateRecord>> GetRecordAsync(object date = null);
+        Task<bool> IsDateHasRecords(DateTime date);
     }
 }
