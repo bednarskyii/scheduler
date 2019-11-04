@@ -39,10 +39,9 @@
                         BackgroundColor="Transparent"/>
             </Grid>
 
-        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="#F3F3F3">
+        <Frame BorderColor="{StaticResource MainBorderColor}" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="{StaticResource CalendarBackground}">
 
           <StackLayout>
-
                 <Grid HorizontalOptions="CenterAndExpand" Margin="0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
