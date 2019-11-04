@@ -16,7 +16,6 @@
                 <x:Array Type="{x:Type local:MasterPageItem}">
                     <local:MasterPageItem Title="About 'Scheduler'" IconSource="icon.png" TargetType="{x:Type pages:AboutPage}" />
                     <local:MasterPageItem Title="Schedule" IconSource="icon.png" TargetType="{x:Type pages:ListViewPage}" />
-                    <local:MasterPageItem Title="Calendar" IconSource="icon.png" TargetType="{x:Type pages:CalendarPage}" />
                 </x:Array>
             </ListView.ItemsSource>
             <ListView.ItemTemplate>

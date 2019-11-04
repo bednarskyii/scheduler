@@ -17,7 +17,7 @@ namespace Scheduler.Data
             database.CreateTableAsync<SingleDateRecord>().Wait();
         }
 
-        public async Task<List<SingleDateRecord>> GetRecordsAsync(object date = null)
+        public async Task<List<SingleDateRecord>> GetRecordsAsync(DateTime? date = null)
         {
             if (date != null)
             {
@@ -43,13 +43,7 @@ namespace Scheduler.Data
 
         public async Task<bool> IsDateHasRecords(DateTime date)
         {
-            int t = await database.Table<SingleDateRecord>().Where((i) => i.ExpirationTime == date).CountAsync();
-
-            if (t == 0)
-                return false;
-
-            else
-                return true;
+            return await database.Table<SingleDateRecord>().Where((i) => i.ExpirationTime == date).CountAsync() != 0;
         }
     }
 }

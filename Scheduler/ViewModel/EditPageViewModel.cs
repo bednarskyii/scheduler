@@ -17,7 +17,7 @@ namespace Scheduler.ViewModel
         public string Title { get; set; }
         public string SelectedStatus { get; set; }
         public int SelectedStatusIndex { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public DateTime MinDate { get; set; } = DateTime.Now;
         public Command SaveCommand { get; set; }
         public Command CancelCommand { get; set; }
@@ -84,7 +84,7 @@ namespace Scheduler.ViewModel
 
         private SingleDateRecord GetUpdatedObject(SingleDateRecord curObject)
         {
-            curObject.ExpirationTime = Date.Date;
+            curObject.ExpirationTime = Date;
             curObject.TextBody = Text;
             curObject.Title = Title;
 

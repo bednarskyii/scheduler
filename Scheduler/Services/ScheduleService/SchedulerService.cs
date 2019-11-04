@@ -18,7 +18,7 @@ namespace Scheduler.Services
             await App.Database.DeleteItemByIdAsync(id);
         }
 
-        public async Task<List<SingleDateRecord>> GetRecordAsync(object date)
+        public async Task<List<SingleDateRecord>> GetRecordAsync(DateTime? date)
         {
             return await App.Database.GetRecordsAsync(date);
         }

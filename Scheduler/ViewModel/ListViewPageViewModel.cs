@@ -13,12 +13,11 @@ namespace Scheduler.ViewModel
     public class ListViewPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public INavigation Navigation { get; set; }
 
         private IScheduleService _schedulerService;
         private ObservableCollection<SingleDateRecord> _listOfItems;
         private DateTime _selectedDay = DateTime.Now.Date;
-
-        public INavigation Navigation { get; set; }
 
         public ObservableCollection<SingleDateRecord> ListOfItems
         {

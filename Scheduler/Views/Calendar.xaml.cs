@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scheduler.Services;
 using Xamarin.Forms;
@@ -75,7 +74,6 @@ namespace Scheduler.Views
 
                     if (await _scheduleService.IsDateHasRecords(currentDay.Date))
                     {
-                        //TODO change this logic to more effective 
                         CalendarArea.Children.Add(new Label { Text = ".", TextColor = Color.Red, Margin = 3, FontSize = 30, HorizontalOptions = LayoutOptions.CenterAndExpand }, j, i);
                     }
 
@@ -88,13 +86,13 @@ namespace Scheduler.Views
         private void OnNextMonthClicked(object sender, EventArgs e)
         {
             _selectedDate = _selectedDate.AddMonths(1) ;
-            CleanCalendar();
+            UpdateCalendar();
         }
 
         private void OnPreviousMonthClicked(object sender, EventArgs e)
         {
             _selectedDate = _selectedDate.AddMonths(-1);
-            CleanCalendar();
+            UpdateCalendar();
         }
 
         private void OnDayClicked(object sender, EventArgs e)
@@ -104,12 +102,12 @@ namespace Scheduler.Views
                 _selectedDayButton.BackgroundColor = Color.Transparent;
             }
             _selectedDayButton = (Button)sender;
-            DateTime date = (DateTime)_selectedDayButton.CommandParameter;
             _selectedDayButton.BackgroundColor = Color.DarkGray;
+            DateTime date = (DateTime)_selectedDayButton.CommandParameter;
             SelectedDay = date;
         }
 
-        private void CleanCalendar()
+        private void UpdateCalendar()
         {
             CalendarArea.Children.Clear();
             FillCalendar(_selectedDate.Month, _selectedDate.Year);
