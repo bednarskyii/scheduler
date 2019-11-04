@@ -1,4 +1,5 @@
 ﻿using System;
+using Scheduler.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

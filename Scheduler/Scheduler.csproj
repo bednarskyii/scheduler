@@ -8,5 +8,32 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\ScheduleService\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Converter\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\EmptyClass.cs" />
+    <Compile Remove="SchedulerPage.xaml.cs" />
+    <Compile Remove="Pages\SchedulerPage.xaml.cs" />
+    <Compile Remove="Pages\SchedulerPage.xaml.cs" />
+    <Compile Remove="Models\Master.cs" />
+    <Compile Remove="Models\MasterPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Pages\SchedulerPage.xaml" />
   </ItemGroup>
 </Project>
