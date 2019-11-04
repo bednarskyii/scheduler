@@ -41,8 +41,8 @@
                                         </Grid.RowDefinitions>
 
                                         <StackLayout Grid.Column="0">
-                                            <Label Text="{Binding StartTime}" BackgroundColor="Red"/>
-                                            <Label Text="{Binding EndTime}" VerticalOptions="Center" FontSize="12" Margin="1"/>
+                                            <Label Text="{Binding StartTime, StringFormat='{}{0:hh\\:mm tt}'}" VerticalOptions="Center" FontSize="12" Margin="1"/>
+                                            <Label Text="{Binding EndTime, StringFormat='{}{0:hh\\:mm tt}'}" VerticalOptions="Center" FontSize="12" Margin="1"/>
                                         </StackLayout>
 
                                         <StackLayout Orientation="Vertical" Margin="0" Padding="0" Grid.Column="1">

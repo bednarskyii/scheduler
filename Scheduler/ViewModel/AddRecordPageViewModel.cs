@@ -40,8 +40,8 @@ namespace Scheduler.ViewModel
                                                                                    TextBody = Text,
                                                                                    Status = Enums.RecordStatuses.Scheduled,
                                                                                    ExpirationTime = Date.Date,
-                                                                                   StartTime = SelectedStartTime,
-                                                                                   EndTime = SelectedEndTime});
+                                                                                   StartTime = Convert.ToDateTime(SelectedStartTime.ToString()),
+                                                                                   EndTime = Convert.ToDateTime(SelectedEndTime.ToString())});
             }
 
             await ReturnToPreviousPage();
