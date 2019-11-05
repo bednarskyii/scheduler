@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using Scheduler.Data;
 using Scheduler.Models;
 using Scheduler.Pages;
-using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
@@ -15,7 +15,7 @@ namespace Scheduler.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public INavigation Navigation { get; set; }
 
-        private IScheduleService _schedulerService;
+        private IDatabaseRepository _database;
         private ObservableCollection<SingleDateRecord> _listOfItems;
         private DateTime _selectedDay = DateTime.Now.Date;
 
@@ -51,10 +51,10 @@ namespace Scheduler.ViewModel
 
         public ListViewPageViewModel(INavigation navigation)
         {
+            _database = new DatabaseRepository();
             DeleteCommand = new Command(() => OnDeleteTapped());
             AddRecordCommand = new Command(() => OnAddRecordTapped());
             EditRecordCommand = new Command(OnEditRecordTapped);
-            _schedulerService = new SchedulerService();
 
             Navigation = navigation;
 
@@ -63,7 +63,7 @@ namespace Scheduler.ViewModel
 
         public async Task InitializeListWithDate()
         {
-            ListOfItems = new ObservableCollection<SingleDateRecord>(await _schedulerService.GetRecordAsync(_selectedDay));
+            ListOfItems = new ObservableCollection<SingleDateRecord>(await _database.GetRecordsAsync(_selectedDay));
 
         }
 
@@ -82,7 +82,7 @@ namespace Scheduler.ViewModel
 
                 if (res)
                 {
-                    await _schedulerService.DeleteObjectAsync(SelectedItem.Id);
+                    await _database.DeleteItemByIdAsync(SelectedItem.Id);
                     ListOfItems.Remove(SelectedItem);
                 }
             }

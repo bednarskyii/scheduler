@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Scheduler.Converter;
+using Scheduler.Data;
 using Scheduler.Enums;
 using Scheduler.Models;
-using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
@@ -22,16 +22,16 @@ namespace Scheduler.ViewModel
         public Command SaveCommand { get; set; }
         public Command CancelCommand { get; set; }
 
+        private IDatabaseRepository _database;
         private IValueConverter _statusConverter;
-        private IScheduleService _scheduleService;
         private IList<RecordStatuses> _requiredStatuses;
         private SingleDateRecord _currentObject;
         private ListViewPageViewModel _pg;
 
         public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, SingleDateRecord currentObject)
         {
+            _database = new DatabaseRepository();
             _statusConverter = new EnumToStringWithSpacesConverter();
-            _scheduleService = new SchedulerService();
             _requiredStatuses = new List<RecordStatuses>();
             _currentObject = currentObject;
             _pg = pg;
@@ -64,10 +64,10 @@ namespace Scheduler.ViewModel
 
         private void OnSaveTapped(object obj)
         {
-            _scheduleService.DeleteObjectAsync(_currentObject.Id);
+            _database.DeleteItemByIdAsync(_currentObject.Id);
 
             SingleDateRecord updatedRecord = GetUpdatedObject(_currentObject);
-            _scheduleService.AddObjectToListAsync(updatedRecord);
+            _database.SaveItemAsync(updatedRecord);
             ReturnToPreviousPage();
         }
 

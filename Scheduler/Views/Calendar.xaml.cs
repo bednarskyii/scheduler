@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Scheduler.Services;
+using Scheduler.Data;
 using Xamarin.Forms;
 
 namespace Scheduler.Views
 {
     public partial class Calendar : ContentView
     {
+        private readonly IDatabaseRepository _database;
         private Button _selectedDayButton;
-        private DateTime _selectedDate { get; set; } = DateTime.Now;
-        private IScheduleService _scheduleService;
+        private List<DateTime> _datesWithRecords;
+
 
         public static readonly BindableProperty SelectedDayProperty = BindableProperty.Create(
                                                          propertyName: "SelectedDay",
@@ -22,13 +24,14 @@ namespace Scheduler.Views
         {
             get { return (DateTime)GetValue(SelectedDayProperty); }
             set { SetValue(SelectedDayProperty, value); }
-        }
+        } 
 
         public Calendar()
         {
-            _scheduleService = new SchedulerService();
+            _datesWithRecords = new List<DateTime>();
+            _database = new DatabaseRepository();
             InitializeComponent();
-            FillCalendar(_selectedDate.Month, _selectedDate.Year);
+            FillCalendar(SelectedDay.Month, SelectedDay.Year);
         }
 
         private async Task FillCalendar(int month, int year)
@@ -37,7 +40,7 @@ namespace Scheduler.Views
             DateTime monthStart = new DateTime(year, month, 1);
             DayOfWeek firstDay = monthStart.DayOfWeek;
             
-            MonthLable.Text = _selectedDate.ToString("y");
+            MonthLable.Text = SelectedDay.ToString("y");
 
             if (firstDay != DayOfWeek.Sunday)
             {
@@ -48,7 +51,9 @@ namespace Scheduler.Views
                 counter -= 7;
             }
 
-            var currentDay = monthStart.AddDays(counter);
+            DateTime currentDay = monthStart.AddDays(counter);
+
+            _datesWithRecords = await _database.GetAllDatesWithRecordsByMonth(SelectedDay);
 
             for (int i = 0; i < 6; i++)
             {
@@ -72,7 +77,7 @@ namespace Scheduler.Views
 
                     button.Clicked += OnDayClicked;
 
-                    if (await _scheduleService.IsDateHasRecords(currentDay.Date))
+                    if (_datesWithRecords.Contains(currentDay.Date))
                     {
                         CalendarArea.Children.Add(new Label { Text = ".", TextColor = Color.Red, Margin = 3, FontSize = 30, HorizontalOptions = LayoutOptions.CenterAndExpand }, j, i);
                     }
@@ -85,13 +90,13 @@ namespace Scheduler.Views
 
         private void OnNextMonthClicked(object sender, EventArgs e)
         {
-            _selectedDate = _selectedDate.AddMonths(1) ;
+            SelectedDay = SelectedDay.AddMonths(1) ;
             UpdateCalendar();
         }
 
         private void OnPreviousMonthClicked(object sender, EventArgs e)
         {
-            _selectedDate = _selectedDate.AddMonths(-1);
+            SelectedDay = SelectedDay.AddMonths(-1);
             UpdateCalendar();
         }
 
@@ -110,7 +115,7 @@ namespace Scheduler.Views
         private void UpdateCalendar()
         {
             CalendarArea.Children.Clear();
-            FillCalendar(_selectedDate.Month, _selectedDate.Year);
+            FillCalendar(SelectedDay.Month, SelectedDay.Year);
         }
 
     }

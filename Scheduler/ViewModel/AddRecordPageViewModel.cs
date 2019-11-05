@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using Scheduler.Data;
 using Scheduler.Models;
-using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {
     public class AddRecordPageViewModel
     {
-        private IScheduleService _scheduleService;
+        private IDatabaseRepository _database;
         private ListViewPageViewModel _pg;
 
         public INavigation Navigation { get; set; }
@@ -24,9 +24,9 @@ namespace Scheduler.ViewModel
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
+            _database = new DatabaseRepository();
             SaveCommand = new Command(() => OnSaveTapped());
             CancelCommand = new Command(() => OnCancelTapped());
-            _scheduleService = new SchedulerService();
             Navigation = navigation;
 
             _pg = pg;
@@ -36,10 +36,10 @@ namespace Scheduler.ViewModel
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
-                await _scheduleService.AddObjectToListAsync(new SingleDateRecord { Title = Title,
+                await _database.SaveItemAsync(new SingleDateRecord { Title = Title,
                                                                                    TextBody = Text,
                                                                                    Status = Enums.RecordStatuses.Scheduled,
-                                                                                   ExpirationTime = Date.Date,
+                                                                                   ExpirationTime = Date,
                                                                                    StartTime = Convert.ToDateTime(SelectedStartTime.ToString()),
                                                                                    EndTime = Convert.ToDateTime(SelectedEndTime.ToString())});
             }
