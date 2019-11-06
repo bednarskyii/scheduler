@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Scheduler.Views.Weather">
+    <ContentView.Content>
+        <StackLayout>
+
+            <Frame BorderColor="White" WidthRequest="160" HeightRequest="160" Margin="0,60,0,0" BackgroundColor="DarkSlateGray" HorizontalOptions="CenterAndExpand" CornerRadius="50">
+                <StackLayout x:Name="MainWeatherGrid" BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160">
+                    <Label Text = "{Binding City}" TextColor = "White" HorizontalOptions = "CenterAndExpand"/>
+                    <Label Text =  "{Binding Temperature}" FontSize = "60"  TextColor = "White" HorizontalOptions = "Center"/>
+                    <Label Text = "{Binding Weather}" TextColor = "White" HorizontalOptions = "Center"/>
+                    <Image Source = "{Binding WeatherImageUrl}" WidthRequest = "60" HeightRequest = "60" />
+                </StackLayout>
+            </Frame>
+
+            <StackLayout>
+                <Grid x:Name="WeekWeatherGrid" Margin="20,100,20,20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Column="0" HeightRequest="160" BorderColor="White" BackgroundColor="DarkSlateGray" CornerRadius="10">
+                        <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160"/>
+                    </Frame>
+                    <Frame Grid.Column="1" HeightRequest="160" BackgroundColor="DarkSlateGray" CornerRadius="10">
+                        <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160"/>
+                    </Frame>
+                    <Frame Grid.Column="2" HeightRequest="160" BackgroundColor="DarkSlateGray" CornerRadius="10">
+                        <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160"/>
+                    </Frame>
+                    <Frame Grid.Column="3" HeightRequest="160" BackgroundColor="DarkSlateGray" CornerRadius="10">
+                        <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160"/>
+                    </Frame>
+                    <Frame Grid.Column="4" HeightRequest="160" BackgroundColor="DarkSlateGray" CornerRadius="10">
+                        <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160"/>
+                    </Frame>
+
+                </Grid>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
