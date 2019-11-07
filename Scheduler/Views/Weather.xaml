@@ -3,17 +3,52 @@
     <ContentView.Content>
         <StackLayout>
 
-            <Frame BorderColor="White" WidthRequest="160" HeightRequest="160" Margin="0,60,0,0" BackgroundColor="DarkSlateGray" HorizontalOptions="CenterAndExpand" CornerRadius="50">
-                <StackLayout x:Name="MainWeatherGrid" BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160">
+            <Frame BorderColor="White" WidthRequest="160" HeightRequest="470" Margin="0,60,0,60" BackgroundColor="DarkSlateGray"
+                   HorizontalOptions="CenterAndExpand" CornerRadius="50">
+                <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
                     <Label Text = "{Binding City}" TextColor = "White" HorizontalOptions = "CenterAndExpand"/>
                     <Label Text =  "{Binding Temperature}" FontSize = "60"  TextColor = "White" HorizontalOptions = "Center"/>
                     <Label Text = "{Binding Weather}" TextColor = "White" HorizontalOptions = "Center"/>
-                    <Image Source = "{Binding WeatherImageUrl}" WidthRequest = "60" HeightRequest = "60" />
+                    <Image Source = "http://openweathermap.org/img/w/04d.png"  HeightRequest="30" WidthRequest="30"/>
                 </StackLayout>
             </Frame>
 
-            <StackLayout>
-                <Grid x:Name="WeekWeatherGrid" Margin="20,100,20,20">
+
+                <ListView
+                    SeparatorVisibility="None"
+                    SeparatorColor="Transparent"
+                    ItemsSource="{Binding MainWeatherList}"
+                    HasUnevenRows="True"
+                    Margin="20,0,20,20"
+                    BackgroundColor="Transparent">
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Grid.Column="1" HeightRequest="30" BackgroundColor="DarkSlateGray" CornerRadius="10" Margin="5">
+                                        <StackLayout BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" >
+
+                                            <Grid WidthRequest="300" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0,3*"/>
+                                                    <ColumnDefinition Width="0,4*"/>
+                                                    <ColumnDefinition Width="0,3*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Column="2" Text="{Binding Day}" FontSize = "15"  TextColor = "White" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                                <Image Grid.Column="0" Source = "{Binding WeatherUrl}" HorizontalOptions="CenterAndExpand" WidthRequest="30" HeightRequest="30"/>
+                                                <Label Grid.Column="1" Text="{Binding Temp}" FontSize = "20"  TextColor = "White" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                            </Grid>
+
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                </ListView>
+
+                <!--<Grid x:Name="WeekWeatherGrid" Margin="20,100,20,20">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -43,8 +78,7 @@
                         <StackLayout BackgroundColor="Transparent" HorizontalOptions="Center" WidthRequest="160"/>
                     </Frame>
 
-                </Grid>
-            </StackLayout>
+                </Grid>-->
 
         </StackLayout>
     </ContentView.Content>
