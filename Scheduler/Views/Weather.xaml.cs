@@ -9,7 +9,6 @@ namespace Scheduler.Views
         public Weather()
         {
             BindingContext = new WeatherViewModel();
-
             InitializeComponent();
         }
     }

@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Scheduler.Models;
 using Scheduler.Services.WeatherService;
-using System.Linq;
 using System.Collections.ObjectModel;
 
 namespace Scheduler.ViewModel
@@ -70,7 +69,7 @@ namespace Scheduler.ViewModel
             set
             {
                 weatherUrl = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(weatherUrl)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WeatherImageUrl)));
             }
         }
 
