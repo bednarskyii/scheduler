@@ -9,23 +9,39 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="40">
-        <Label Text="Title:" FontSize="Medium"/>
-        <Editor Text="{Binding Title}"
-                HeightRequest="100"/>
-        <Label Text="Text:" FontSize="Medium"/>
-        <Editor Text="{Binding Text}"
-                HeightRequest="100"/>
-        <Label Text="Date:" FontSize="Medium"/>
-        <DatePicker MinimumDate="{Binding MinDate}"
-                    Date="{Binding Date}"
-                    HeightRequest="100"/>
-        <Label Text="Status:" FontSize="Medium"/>
-        <Picker Title="Select a Status:"
-                TitleColor="Black"
-                ItemsSource="{Binding ListOfStatuses, Converter={StaticResource enumToStringWithSpacesConverter}}"
-                SelectedItem="{Binding SelectedStatus}"
-                SelectedIndex="{Binding SelectedStatusIndex}"
-                HeightRequest="100"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0">
+                <Label Text="Title:" FontSize="Medium"/>
+                <Editor Text="{Binding Title}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1">
+                <Label Text="Text:" FontSize="Medium"/>
+                <Editor Text="{Binding Text}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2">
+                <Label Text="Date:" FontSize="Medium"/>
+                <DatePicker MinimumDate="{Binding MinDate}"
+                            Date="{Binding Date}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="3">
+                <Label Text="Status:" FontSize="Medium"/>
+                <Picker Title="Select a Status:"
+                        TitleColor="Black"
+                        ItemsSource="{Binding ListOfStatuses, Converter={StaticResource enumToStringWithSpacesConverter}}"
+                        SelectedItem="{Binding SelectedStatus}"/>
+            </StackLayout>
+        </Grid>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

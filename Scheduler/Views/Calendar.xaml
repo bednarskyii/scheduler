@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scheduler.Views.Calendar">
+
+    <ContentView.Content>
+        <Frame BorderColor="Black" Padding="0" HasShadow="True">
+        <StackLayout Padding="0">
+            <Grid x:Name="TitleCalendarArea" HeightRequest="25" VerticalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0,3*"/>
+                    <ColumnDefinition Width="0,4*"/>
+                    <ColumnDefinition Width="0,3*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                     <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Button Text="Previous"
+                        Clicked="OnPreviousMonthClicked"
+                        HorizontalOptions="CenterAndExpand"
+                        Grid.Column="0"
+                        TextColor="Black"
+                        HeightRequest="30"
+                        BackgroundColor="Transparent"/>
+                <Label x:Name="MonthLable"
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Column="1"
+                       VerticalOptions="CenterAndExpand"/>
+                <Button Text="Next"
+                        Clicked="OnNextMonthClicked"
+                        HorizontalOptions="CenterAndExpand"
+                        Grid.Column="2"
+                        TextColor="Black"
+                        HeightRequest="30"
+                        BackgroundColor="Transparent"/>
+            </Grid>
+
+        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="#F3F3F3">
+
+          <StackLayout>
+
+                <Grid HorizontalOptions="CenterAndExpand" Margin="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="40"/>
+                     </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                  <Label Text="Mn" Grid.Column="0" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="Tu" Grid.Column="1" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="We" Grid.Column="2" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="Th" Grid.Column="3" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="Fr" Grid.Column="4" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                  <Label Text="St" Grid.Column="5" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
+                  <Label Text="Sa" Grid.Column="6" HorizontalOptions="CenterAndExpand" TextColor="Red"/>
+
+                </Grid>
+
+           <Grid x:Name="CalendarArea" HorizontalOptions="CenterAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+        </Grid>
+          </StackLayout>
+        </Frame>
+        </StackLayout>
+        </Frame>
+    </ContentView.Content>
+
+
+</ContentView>

@@ -2,39 +2,36 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Scheduler.Converter;
+using Scheduler.Data;
 using Scheduler.Enums;
 using Scheduler.Models;
-using Scheduler.Services;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {
     public class EditPageViewModel
     {
+        public IList<RecordStatuses> ListOfStatuses { get; set; }
         public INavigation Navigation { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime MinDate { get; set; } = DateTime.Now;
-        public IList<RecordStatuses> ListOfStatuses { get; set; }
         public string SelectedStatus { get; set; }
         public int SelectedStatusIndex { get; set; }
-
-
+        public DateTime? Date { get; set; }
+        public DateTime MinDate { get; set; } = DateTime.Now;
         public Command SaveCommand { get; set; }
         public Command CancelCommand { get; set; }
 
+        private IDatabaseRepository _database;
         private IValueConverter _statusConverter;
-        private ScheduleRecord _currentObject;
-        private ListViewPageViewModel _pg;
-        private IScheduleService _scheduleService;
         private IList<RecordStatuses> _requiredStatuses;
+        private SingleDateRecord _currentObject;
+        private ListViewPageViewModel _pg;
 
-
-        public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, ScheduleRecord currentObject)
+        public EditPageViewModel(INavigation navigation, ListViewPageViewModel pg, SingleDateRecord currentObject)
         {
+            _database = new DatabaseRepository();
             _statusConverter = new EnumToStringWithSpacesConverter();
-            _scheduleService = new SchedulerService();
             _requiredStatuses = new List<RecordStatuses>();
             _currentObject = currentObject;
             _pg = pg;
@@ -67,10 +64,10 @@ namespace Scheduler.ViewModel
 
         private void OnSaveTapped(object obj)
         {
-            _scheduleService.DeleteObject(_currentObject);
+            _database.DeleteItemByIdAsync(_currentObject.Id);
 
-            ScheduleRecord updatedRecord = GetUpdatedObject(_currentObject);
-            _scheduleService.AddObjectToList(updatedRecord);
+            SingleDateRecord updatedRecord = GetUpdatedObject(_currentObject);
+            _database.SaveItemAsync(updatedRecord);
             ReturnToPreviousPage();
         }
 
@@ -82,10 +79,10 @@ namespace Scheduler.ViewModel
         private void ReturnToPreviousPage()
         {
             Navigation.PopModalAsync();
-            _pg.InitializeList();
+            _pg.InitializeListWithDate();
         }
 
-        private ScheduleRecord GetUpdatedObject(ScheduleRecord curObject)
+        private SingleDateRecord GetUpdatedObject(SingleDateRecord curObject)
         {
             curObject.ExpirationTime = Date;
             curObject.TextBody = Text;

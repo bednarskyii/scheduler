@@ -1,7 +1,4 @@
-﻿using System;
-using Scheduler.Models;
-using Scheduler.Pages;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {

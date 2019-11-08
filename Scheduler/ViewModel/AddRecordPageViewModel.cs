@@ -1,49 +1,61 @@
-﻿using Scheduler.Models;
-using Scheduler.Services;
+using System;
+using System.Threading.Tasks;
+using Scheduler.Data;
+using Scheduler.Models;
 using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {
     public class AddRecordPageViewModel
     {
-        private IScheduleService _scheduleService;
+        private IDatabaseRepository _database;
         private ListViewPageViewModel _pg;
 
         public INavigation Navigation { get; set; }
-        public Command<object> SaveCommand { get; set; }
-        public Command<object> CancelCommand { get; set; }
+        public Command SaveCommand { get; set; }
+        public Command CancelCommand { get; set; }
         public string Text { get; set; }
         public string Title { get; set; }
+        public DateTime Date { get; set; } 
+        public DateTime MinDate { get; set; } = DateTime.Now;
+        public TimeSpan SelectedStartTime { get; set; }
+        public TimeSpan SelectedEndTime { get; set; }
+
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {
-            SaveCommand = new Command<object>(OnSaveTapped);
-            CancelCommand = new Command<object>(OnCancelTapped);
-            _scheduleService = new SchedulerService();
+            _database = new DatabaseRepository();
+            SaveCommand = new Command(() => OnSaveTapped());
+            CancelCommand = new Command(() => OnCancelTapped());
             Navigation = navigation;
 
             _pg = pg;
         }
 
-        private void OnSaveTapped(object obj)
+        private async Task OnSaveTapped()
         {
             if (!string.IsNullOrWhiteSpace(Title))
             {
-                _scheduleService.AddObjectToList(new ScheduleRecord { Title = Title, TextBody = Text, Status = Enums.RecordStatuses.Scheduled });
+                await _database.SaveItemAsync(new SingleDateRecord { Title = Title,
+                                                                                   TextBody = Text,
+                                                                                   Status = Enums.RecordStatuses.Scheduled,
+                                                                                   ExpirationTime = Date,
+                                                                                   StartTime = Convert.ToDateTime(SelectedStartTime.ToString()),
+                                                                                   EndTime = Convert.ToDateTime(SelectedEndTime.ToString())});
             }
 
-            ReturnToPreviousPage();
+            await ReturnToPreviousPage();
         }
 
-        private void OnCancelTapped(object obj)
+        private async Task OnCancelTapped()
         {
-            ReturnToPreviousPage();
+            await ReturnToPreviousPage();
         }
 
-        private void ReturnToPreviousPage()
+        private async Task ReturnToPreviousPage()
         {
-            Navigation.PopModalAsync();
-            _pg.InitializeList();
+            await Navigation.PopModalAsync();
+            await _pg.InitializeListWithDate();
         }
     }
 }
