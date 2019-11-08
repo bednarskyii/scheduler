@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using Plugin.Multilingual;
 using Scheduler.Data;
-using Scheduler.Pages;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Scheduler
 {
@@ -12,6 +12,8 @@ namespace Scheduler
         public App()
         {
             InitializeComponent();
+
+            CrossMultilingual.Current.CurrentCultureInfo = CrossMultilingual.Current.DeviceCultureInfo;
 
             MainPage = new MainPage();
         }

@@ -8,9 +8,9 @@
         <StackLayout Padding="0">
             <Grid x:Name="TitleCalendarArea" HeightRequest="25" VerticalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0,3*"/>
-                    <ColumnDefinition Width="0,4*"/>
-                    <ColumnDefinition Width="0,3*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="0.2*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -18,8 +18,9 @@
                 </Grid.RowDefinitions>
 
                 <Button Text="Previous"
+                        Padding="10,0,0,0"
                         Clicked="OnPreviousMonthClicked"
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="Start"
                         Grid.Column="0"
                         TextColor="Black"
                         HeightRequest="30"
@@ -29,18 +30,18 @@
                        Grid.Column="1"
                        VerticalOptions="CenterAndExpand"/>
                 <Button Text="Next"
+                        Padding="0,0,10,0"
                         Clicked="OnNextMonthClicked"
-                        HorizontalOptions="CenterAndExpand"
+                        HorizontalOptions="End"
                         Grid.Column="2"
                         TextColor="Black"
                         HeightRequest="30"
                         BackgroundColor="Transparent"/>
             </Grid>
 
-        <Frame BorderColor="Black" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="#F3F3F3">
+        <Frame BorderColor="{StaticResource MainBorderColor}" Padding="0" HasShadow="False" WidthRequest="280" BackgroundColor="{StaticResource CalendarBackground}">
 
           <StackLayout>
-
                 <Grid HorizontalOptions="CenterAndExpand" Margin="0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>

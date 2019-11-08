@@ -79,7 +79,7 @@ namespace Scheduler.Views
 
                     if (_datesWithRecords.Contains(currentDay.Date))
                     {
-                        CalendarArea.Children.Add(new Label { Text = ".", TextColor = Color.Red, Margin = 3, FontSize = 30, HorizontalOptions = LayoutOptions.CenterAndExpand }, j, i);
+                        CalendarArea.Children.Add(new Label { Text = ".", TextColor = (Color)Application.Current.Resources["DayWithRecordsDotColor"], Margin = 3, FontSize = 30, HorizontalOptions = LayoutOptions.CenterAndExpand }, j, i);
                     }
 
                     CalendarArea.Children.Add(button, j, i);
