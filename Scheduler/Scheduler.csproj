@@ -23,6 +23,7 @@
     <Folder Include="Services\" />
     <Folder Include="Services\WeatherService\" />
     <Folder Include="Controls\" />
+    <Folder Include="CustomControlls\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\EmptyClass.cs" />
