@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+<<<<<<< HEAD
+             x:Class="Scheduler.Pages.AboutPage"
+             xmlns:local="clr-namespace:Scheduler.CustomControlls;assembly=Scheduler">
+    <StackLayout>
+        <Label Text="Application created by Serhiy Bednarskyi" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+        <local:BackgroundLabel Text="Text from custom label renderer"/>
+    </StackLayout>
+=======
+             xmlns:localization="clr-namespace:Scheduler.Localization"
+             x:Class="Scheduler.Pages.AboutPage">
+        <Label Text="{localization:Translate AppCreatedBy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+>>>>>>> development
+</ContentPage>
