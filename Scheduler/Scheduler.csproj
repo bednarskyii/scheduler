@@ -23,10 +23,10 @@
     <Folder Include="Data\" />
     <Folder Include="Services\" />
     <Folder Include="Services\WeatherService\" />
-    <Folder Include="Controls\" />
     <Folder Include="CustomControlls\" />
     <Folder Include="Localization\" />
     <Folder Include="Localization\Resx\" />
+    <Folder Include="DependencyServices\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\EmptyClass.cs" />

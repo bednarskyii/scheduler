@@ -7,7 +7,6 @@
              xmlns:local="clr-namespace:Scheduler.Models;assembly=Scheduler"
              xmlns:pages="clr-namespace:Scheduler.Pages;assembly=Scheduler">
 
-    <StackLayout>
         <ListView
             x:Name="listView"
             x:FieldModifier="public"
@@ -35,5 +34,4 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackLayout>
   </ContentPage>

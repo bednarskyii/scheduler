@@ -6,6 +6,8 @@
         <StackLayout>
             <Editor Text="{Binding Title}"/>
             <Label Text="{Binding DisplayTitle}"/>
+
+            <Label Text="{Binding Orientation}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

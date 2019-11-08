@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Scheduler.Models;
 using Scheduler.Services.WeatherService;
 using System.Collections.ObjectModel;
+using Acr.UserDialogs;
 
 namespace Scheduler.ViewModel
 {
@@ -85,12 +86,22 @@ namespace Scheduler.ViewModel
         {
             items = await _weatherService.GetCurrentWeather(_cityName);
 
+            if(items == null)
+            {
+                UserDialogs.Instance.Alert("Sorry, we cannot lounch the weather resource");
+            }
+
             Temperature = Convert.ToInt32(items.MainWeather.Temperature);
             City = items.Name;
             Weather = items.Weather[0].Main;
             WeatherImageUrl = items.DisplayIcon;
 
             WeekWeather.RootObject weekWeather = await _weatherService.GetWeatherForWeek(_cityName);
+
+            if (items != null && weekWeather == null)
+            {
+                UserDialogs.Instance.Alert("Sorry, we cannot lounch the weather resource");
+            }
 
             List<WeekWeather.List> wideList = weekWeather.list;
 

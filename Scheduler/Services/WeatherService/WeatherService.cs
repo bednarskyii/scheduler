@@ -17,7 +17,7 @@ namespace Scheduler.Services.WeatherService
                 string requestUrl = string.Format($"http://api.openweathermap.org/data/2.5/weather?appid=9a324a6b139e0715c71faf3dba25b1b5&units=metric&q={city}");
 
                 var response = await _client.GetAsync(requestUrl);
-
+                 response = null;
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
