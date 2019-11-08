@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Scheduler.Data;
 using Scheduler.Models;
@@ -6,21 +7,42 @@ using Xamarin.Forms;
 
 namespace Scheduler.ViewModel
 {
-    public class AddRecordPageViewModel
+    public class AddRecordPageViewModel : INotifyPropertyChanged
     {
         private IDatabaseRepository _database;
         private ListViewPageViewModel _pg;
+        private string _title = string.Empty;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public INavigation Navigation { get; set; }
         public Command SaveCommand { get; set; }
         public Command CancelCommand { get; set; }
-        public string Text { get; set; }
-        public string Title { get; set; }
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                if (_title == value)
+                    return;
+
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+                OnPropertyChanged(nameof(DisplayTitle));
+            }}
+
+        public string DisplayTitle => $"Entered title: {_title}";
+
+        public string Text { get;  set; }
         public DateTime Date { get; set; } 
         public DateTime MinDate { get; set; } = DateTime.Now;
         public TimeSpan SelectedStartTime { get; set; }
         public TimeSpan SelectedEndTime { get; set; }
 
+        void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
         public AddRecordPageViewModel(INavigation navigation, ListViewPageViewModel pg)
         {

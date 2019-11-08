@@ -7,6 +7,7 @@
         <Editor Placeholder="Enter the title"
                 Text="{Binding Title}"
                 HeightRequest="100"/>
+        <Label Text="{Binding DisplayTitle}"/>
         <Editor Placeholder="Enter additional text"
                 Text="{Binding Text}"
                 HeightRequest="100" />
