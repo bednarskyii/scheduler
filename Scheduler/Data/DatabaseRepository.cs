@@ -24,13 +24,17 @@ namespace Scheduler.Data
             await database.Table<SingleDateRecord>().Where(i => i.Id == id).DeleteAsync();
         }
 
-        public async Task<List<SingleDateRecord>> GetRecordsAsync(DateTime? date = null)
+        public async Task<List<SingleDateRecord>> GetRecordsAsync(DateTime? date = null, string titlePart = null)
         {
             if (date != null)
             {
                 DateTime unboxedDate = (DateTime)date;
                 unboxedDate = unboxedDate.Date;
                 return await database.Table<SingleDateRecord>().Where((i) => i.ExpirationTime == unboxedDate).ToListAsync();
+            }
+            if (titlePart != null)
+            {
+                return await database.Table<SingleDateRecord>().Where((i) => i.Title.Contains(titlePart)).ToListAsync();
             }
             else
             {

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="Self"
+             x:Class="Scheduler.Views.SearchBarView">
+    <ContentView.Content>
+        <StackLayout>
+            <Editor Text="{Binding SelectedTitle}"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
