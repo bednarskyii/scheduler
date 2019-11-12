@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Scheduler.Data;
 using Scheduler.Models;
 using Xamarin.Forms;
@@ -17,10 +16,9 @@ namespace Scheduler.ViewModel
         private ObservableCollection<SingleDateRecord> _listOfItems;
         private bool _isListViewVisible;
         private bool _isEmptyImageVisible;
+        private bool _isStartImageVisible = true;
+
         private string _queryText;
-
-
-        public string DisplayTitle => $"Entered title: {_queryText}";
 
         public string QueryText
         {
@@ -28,8 +26,9 @@ namespace Scheduler.ViewModel
             set
             {
                 _queryText = value;
+                if(!string.IsNullOrEmpty(_queryText)) 
+                    InitializeList(null, _queryText);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QueryText)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayTitle)));
             }
         }
 
@@ -40,17 +39,25 @@ namespace Scheduler.ViewModel
                 return _listOfItems;
             }
             set
-            {
+             {
                 _listOfItems = value;
                 if (_listOfItems == null)
                 {
+                    IsStartImageVisible = true;
+                    IsEmptyImageVisible = false;
+                    IsListViewVisible = false;
+                }
+                if ( _listOfItems.Count == 0)
+                {
                     IsEmptyImageVisible = true;
                     IsListViewVisible = false;
+                    IsStartImageVisible = false;
                 }
                 else
                 {
-                    IsEmptyImageVisible = false;
                     IsListViewVisible = true;
+                    IsEmptyImageVisible = false;
+                    IsStartImageVisible = false;
                 }
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ListOfItems)));
@@ -77,16 +84,25 @@ namespace Scheduler.ViewModel
             }
         }
 
+        public bool IsStartImageVisible
+        {
+            get => _isStartImageVisible;
+            set
+            {
+                _isStartImageVisible = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsStartImageVisible)));
+            }
+        }
+
         public SearchPageViewModel()
         {
             _database = new DatabaseRepository();
-
-            InitializeList();
         }
 
-        public async Task InitializeList()
+        public async Task InitializeList(DateTime? month, string title)
         {
-            ListOfItems = new ObservableCollection<SingleDateRecord>(await _database.GetRecordsAsync(null,"F"));
+            ListOfItems = new ObservableCollection<SingleDateRecord>(await _database.GetRecordsAsync(month, title));
         }
+
     }
 }

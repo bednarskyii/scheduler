@@ -82,6 +82,7 @@
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Resources\weatherBackground.jpg" />
+    <None Include="Resources\searchIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.xml" />
@@ -110,6 +111,10 @@
       <Project>{A78208D1-448E-42DE-8473-D3AC59AB7842}</Project>
       <Name>Scheduler</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\SearchNoResult.jpeg" />
+    <BundleResource Include="Resources\startSearch.jpg" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

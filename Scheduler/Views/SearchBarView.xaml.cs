@@ -8,7 +8,6 @@ namespace Scheduler.Views
     {
         public static readonly BindableProperty SelectedTitleProperty = BindableProperty.Create(
                                                  propertyName: "SelectedTitle",
-                                                 defaultValue: "default",
                                                  returnType: typeof(string),
                                                  declaringType: typeof(SearchBarView),
                                                  defaultBindingMode: BindingMode.OneWayToSource);
@@ -22,8 +21,6 @@ namespace Scheduler.Views
         public SearchBarView()
         {
             InitializeComponent();
-
-            BindingContext = this;
         }
     }
 }

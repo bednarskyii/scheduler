@@ -71,6 +71,7 @@
       <DependentUpon>SearchPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Renderers\EntryWithoutBorderRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -151,6 +152,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon.png" />
     <BundleResource Include="Resources\weatherBackground.jpg" />
+    <BundleResource Include="Resources\searchIcon.png" />
+    <BundleResource Include="Resources\SearchNoResult.jpeg" />
+    <BundleResource Include="Resources\startSearch.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />
