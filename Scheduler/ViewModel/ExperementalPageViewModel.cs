@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using Scheduler.DependencyServices;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Scheduler.ViewModel
 {
@@ -8,6 +11,8 @@ namespace Scheduler.ViewModel
         private string _title;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string Orientation { get; set; }
 
         void OnPropertyChanged (string title)
         {
@@ -29,5 +34,12 @@ namespace Scheduler.ViewModel
         }
 
         public string DisplayTitle => $"Entered title: {_title}";
+
+        public ExperementalPageViewModel()
+        {
+            IDeviceOrientationService service = DependencyService.Get<IDeviceOrientationService>();
+            DeviceOrientation orientation = service.GetOrientation();
+            Orientation = orientation.ToString();
+        }
     }
 }

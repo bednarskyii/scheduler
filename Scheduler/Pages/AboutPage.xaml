@@ -2,6 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:localization="clr-namespace:Scheduler.Localization"
-             x:Class="Scheduler.Pages.AboutPage">
+             x:Class="Scheduler.Pages.AboutPage"
+             xmlns:local="clr-namespace:Scheduler.CustomControlls;assembly=Scheduler">
+    <StackLayout>
+        <Label Text="Application created by Serhiy Bednarskyi" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+        <local:BackgroundLabel Text="Text from custom label renderer"/>
         <Label Text="{localization:Translate AppCreatedBy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+    </StackLayout>
 </ContentPage>

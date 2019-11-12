@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,7 +7,6 @@
              xmlns:local="clr-namespace:Scheduler.Models;assembly=Scheduler"
              xmlns:pages="clr-namespace:Scheduler.Pages;assembly=Scheduler">
 
-    <StackLayout>
         <ListView
             x:Name="listView"
             x:FieldModifier="public"
@@ -16,6 +15,7 @@
                 <x:Array Type="{x:Type local:MasterPageItem}">
                     <local:MasterPageItem Title="About 'Scheduler'" IconSource="icon.png" TargetType="{x:Type pages:AboutPage}" />
                     <local:MasterPageItem Title="Schedule" IconSource="icon.png" TargetType="{x:Type pages:ListViewPage}" />
+                    <local:MasterPageItem Title="Weather" IconSource="icon.png" TargetType="{x:Type pages:WeatherPage}" />
                     <local:MasterPageItem Title="Experemental page" IconSource="icon.png" TargetType="{x:Type pages:ExperementalPage}" />
                 </x:Array>
             </ListView.ItemsSource>
@@ -34,5 +34,4 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackLayout>
   </ContentPage>
