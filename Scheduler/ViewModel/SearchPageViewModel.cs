@@ -26,7 +26,7 @@ namespace Scheduler.ViewModel
             set
             {
                 _queryText = value;
-                if(!string.IsNullOrEmpty(_queryText)) 
+                if (!string.IsNullOrEmpty(_queryText)) 
                     InitializeList(null, _queryText);
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QueryText)));
             }

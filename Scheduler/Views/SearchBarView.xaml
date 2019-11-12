@@ -10,7 +10,8 @@
                 <Grid>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="0.2*"/>
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
 
@@ -20,6 +21,7 @@
 
                     <local:EntryWithoutBorder Grid.Column="0" Placeholder="Enter the title" Text="{Binding SelectedTitle, Source={x:Reference Self}}"/>
                     <Image Source="searchIcon.png" WidthRequest="30" HeightRequest="30" Grid.Column="1"/>
+                    <Button Grid.Column="2" Text="Cancel" BackgroundColor="DarkRed" TextColor="White" Command="{Binding OnCancel, Source={x:Reference Self}}"/>
                 </Grid>
             </Frame>
         </StackLayout>

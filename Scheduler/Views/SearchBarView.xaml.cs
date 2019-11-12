@@ -6,6 +6,8 @@ namespace Scheduler.Views
 {
     public partial class SearchBarView : ContentView
     {
+        public Command OnCancel { get; set; }
+
         public static readonly BindableProperty SelectedTitleProperty = BindableProperty.Create(
                                                  propertyName: "SelectedTitle",
                                                  returnType: typeof(string),
@@ -20,7 +22,13 @@ namespace Scheduler.Views
 
         public SearchBarView()
         {
+            OnCancel = new Command(() => OnCancelClick());
             InitializeComponent();
+        }
+
+        private void OnCancelClick()
+        {
+            SelectedTitle = null;
         }
     }
 }
