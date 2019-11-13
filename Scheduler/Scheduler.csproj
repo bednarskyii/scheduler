@@ -27,6 +27,7 @@
     <Folder Include="Localization\" />
     <Folder Include="Localization\Resx\" />
     <Folder Include="DependencyServices\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\EmptyClass.cs" />
@@ -43,6 +44,12 @@
     </Compile>
     <Compile Update="Localization\Resx\AppResources.es.Designer.cs">
       <DependentUpon>AppResources.es.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SearchItemsPage.xaml.cs">
+      <DependentUpon>SearchItemsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SearchBarView.xaml.cs">
+      <DependentUpon>SearchBarView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

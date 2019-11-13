@@ -7,7 +7,7 @@ namespace Scheduler.Data
 {
     public interface IDatabaseRepository
     {
-        Task<List<SingleDateRecord>> GetRecordsAsync(DateTime? date = null);
+        Task<List<SingleDateRecord>> GetRecordsAsync(DateTime? date = null, string titlePart = null);
         Task SaveItemAsync(SingleDateRecord item);
         Task DeleteItemByIdAsync(Guid id);
         Task<List<DateTime>> GetAllDatesWithRecordsByMonth(DateTime month);

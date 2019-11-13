@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="Self"
+             x:Class="Scheduler.Views.SearchBarView"
+             xmlns:local="clr-namespace:Scheduler.CustomControlls;assembly=Scheduler">
+    <ContentView.Content>
+        <StackLayout>
+            <Frame BorderColor="Black" HeightRequest="30" Margin="10" Padding="5">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.6*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <local:EntryWithoutBorder Grid.Column="0" Placeholder="Enter the title" Text="{Binding SelectedTitle, Source={x:Reference Self}}"/>
+                    <Image Source="searchIcon.png" WidthRequest="30" HeightRequest="30" Grid.Column="1"/>
+                    <Button Grid.Column="2" Text="Cancel" BackgroundColor="DarkRed" TextColor="White" Command="{Binding OnCancel, Source={x:Reference Self}}"/>
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

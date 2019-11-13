@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scheduler.Pages.SearchItemsPage"
+             xmlns:views="clr-namespace:Scheduler.Views">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <views:SearchBarView SelectedTitle="{Binding QueryText}"/>
+
+            <Label Text="No records with title like this"
+                   IsVisible="{Binding IsEmptyImageVisible}"
+                   HorizontalOptions="CenterAndExpand"/>
+
+            <Image Source="SearchNoResult.jpeg" WidthRequest="50" HeightRequest="100" IsVisible="{Binding IsEmptyImageVisible}"/>
+
+            <Image Source="startSearch.jpg" WidthRequest="50" HeightRequest="100" IsVisible="{Binding IsStartImageVisible}"/>
+
+            <ListView ItemsSource="{Binding ListOfItems}"
+                      IsVisible="{Binding IsListViewVisible}"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Title}" Margin="15, 5, 15, 5"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -17,6 +17,7 @@
                     <local:MasterPageItem Title="Schedule" IconSource="icon.png" TargetType="{x:Type pages:ListViewPage}" />
                     <local:MasterPageItem Title="Weather" IconSource="icon.png" TargetType="{x:Type pages:WeatherPage}" />
                     <local:MasterPageItem Title="Experemental page" IconSource="icon.png" TargetType="{x:Type pages:ExperementalPage}" />
+                    <local:MasterPageItem Title="Search by title" IconSource="icon.png" TargetType="{x:Type pages:SearchItemsPage}" />
                 </x:Array>
             </ListView.ItemsSource>
             <ListView.ItemTemplate>

@@ -67,6 +67,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\StrangeLabelRenderer.cs" />
     <Compile Include="DependencyServices\DeviceOrientationService.cs" />
+    <Compile Include="SearchPage.xaml.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' ">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Renderers\EntryWithoutBorderRenderer.cs" />
+    <Compile Include="Renderers\StrangeFrameRenderrer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -147,9 +153,18 @@
   <ItemGroup>
     <BundleResource Include="Resources\icon.png" />
     <BundleResource Include="Resources\weatherBackground.jpg" />
+    <BundleResource Include="Resources\searchIcon.png" />
+    <BundleResource Include="Resources\SearchNoResult.jpeg" />
+    <BundleResource Include="Resources\startSearch.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />
     <Folder Include="DependencyServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

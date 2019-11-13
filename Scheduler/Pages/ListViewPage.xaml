@@ -4,7 +4,8 @@
              x:Class="Scheduler.Pages.ListViewPage"
              Title="Schedule"
              xmlns:views="clr-namespace:Scheduler.Views"
-             xmlns:converters="clr-namespace:Scheduler.Converter;assembly=Scheduler">
+             xmlns:converters="clr-namespace:Scheduler.Converter;assembly=Scheduler"
+             xmlns:local="clr-namespace:Scheduler.CustomControlls;assembly=Scheduler">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -51,10 +52,10 @@
                                         </StackLayout>
 
                                         <StackLayout Orientation="Vertical" Grid.Column="2">
-                                            <Frame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="20" HasShadow="False">
+                                            <local:StrangeFrame BorderColor="{Binding Status, Converter={StaticResource statusToColorConverter}}" WidthRequest="70" Padding="5" HeightRequest="52" HasShadow="False">
                                                <Label Text="{Binding Status, Converter={StaticResource singleStatusToString}}" HorizontalOptions="End" HorizontalTextAlignment="Center" FontSize="10" WidthRequest="100"
                                                     VerticalOptions="CenterAndExpand" TextColor="{Binding Status, Converter={StaticResource statusToColorConverter}}"/>
-                                            </Frame>
+                                            </local:StrangeFrame>
                                             <Label Text="{Binding ExpirationTime, StringFormat='{0:MMM dd}'}" HorizontalOptions="StartAndExpand"
                                                    FontSize="11" TextColor="Black" WidthRequest="100" VerticalOptions="StartAndExpand"/>
                                         </StackLayout>
