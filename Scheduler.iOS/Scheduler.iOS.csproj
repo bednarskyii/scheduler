@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Renderers\EntryWithoutBorderRenderer.cs" />
+    <Compile Include="Renderers\StrangeFrameRenderrer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

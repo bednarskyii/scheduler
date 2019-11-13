@@ -4,9 +4,19 @@
              xmlns:localization="clr-namespace:Scheduler.Localization"
              x:Class="Scheduler.Pages.AboutPage"
              xmlns:local="clr-namespace:Scheduler.CustomControlls;assembly=Scheduler">
+
     <StackLayout>
-        <Label Text="Application created by Serhiy Bednarskyi" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
-        <local:BackgroundLabel Text="Text from custom label renderer"/>
-        <Label Text="{localization:Translate AppCreatedBy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+
+            <StackLayout>
+                <Label Text="Application created by Serhiy Bednarskyi" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+                <local:BackgroundLabel Text="Text from custom label renderer"/>
+                <Label Text="{localization:Translate AppCreatedBy}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Label>
+            </StackLayout>
+
+        <local:StrangeFrame HeightRequest="100"
+                            BackgroundColor="LightGray"
+                            WidthRequest="100">
+        </local:StrangeFrame>
     </StackLayout>
+
 </ContentPage>

@@ -27,6 +27,7 @@
     <Folder Include="Localization\" />
     <Folder Include="Localization\Resx\" />
     <Folder Include="DependencyServices\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\EmptyClass.cs" />

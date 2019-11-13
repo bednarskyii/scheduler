@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Scheduler.Pages.AddRecordPage"
              Title="Record Entry">
+
+    <ContentPage.Resources>
+        <StyleSheet Source="/Styles/PagesStyle.css"/>
+    </ContentPage.Resources>
+
     <StackLayout Margin="40">
         <Editor Placeholder="Enter the title"
                 Text="{Binding Title}"

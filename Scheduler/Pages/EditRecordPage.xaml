@@ -7,6 +7,8 @@
         <ResourceDictionary>
             <converters:EnumToStringWithSpacesConverter x:Key="enumToStringWithSpacesConverter" />
         </ResourceDictionary>
+        <StyleSheet Source="/Styles/EditRecordStyles.css"/>
+        <StyleSheet Source="/Styles/PagesStyle.css"/>
     </ContentPage.Resources>
     <StackLayout Margin="40">
         <Grid>
@@ -18,23 +20,23 @@
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0">
-                <Label Text="Title:" FontSize="Medium"/>
+                <Label Text="Title:" StyleClass="titleLabel"/>
                 <Editor Text="{Binding Title}"/>
             </StackLayout>
 
             <StackLayout Grid.Row="1">
-                <Label Text="Text:" FontSize="Medium"/>
+                <Label Text="Text:" StyleClass="titleLabel"/>
                 <Editor Text="{Binding Text}"/>
             </StackLayout>
 
             <StackLayout Grid.Row="2">
-                <Label Text="Date:" FontSize="Medium"/>
+                <Label Text="Date:" StyleClass="titleLabel"/>
                 <DatePicker MinimumDate="{Binding MinDate}"
                             Date="{Binding Date}"/>
             </StackLayout>
 
             <StackLayout Grid.Row="3">
-                <Label Text="Status:" FontSize="Medium"/>
+                <Label Text="Status:" StyleClass="titleLabel"/>
                 <Picker Title="Select a Status:"
                         TitleColor="Black"
                         ItemsSource="{Binding ListOfStatuses, Converter={StaticResource enumToStringWithSpacesConverter}}"
@@ -43,10 +45,12 @@
         </Grid>
 
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <Button Text="Save"
                     Command="{Binding SaveCommand}"
                     TextColor="Green"/>
